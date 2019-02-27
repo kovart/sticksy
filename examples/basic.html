@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="us">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic example</title>
+    <style>
+        *, *::after { box-sizing: border-box; }
+        body {
+            font-family: "Open Sans", Helvetica, sans-serif;
+            color:#7b7b7b;
+            margin: 10px 20px;
+            font-size: 18px;
+            min-height: 150vh;
+        }
+
+        .wrapper { display: flex; }
+
+        header, footer {
+            font-size: 2em;
+            background-color:#e5e5e5;
+            padding: 15px;
+            text-align:center;
+        }
+
+        main {
+            flex: 1;
+            padding:0 20px;
+            line-height: 1.5em;
+        }
+
+        aside {
+            width:30%;
+            min-width: 150px;
+            max-width: 300px;
+        }
+
+        aside .widget {
+            padding:15px;
+            margin:7px 0;
+            text-align:center;
+            background-color:#e5e5e5;
+        }
+
+        @media only screen and (max-width:620px) {
+            body { font-size: 15px; }
+        }
+    </style>
+</head>
+<body>
+<div class="limiter">
+    <header>Header</header>
+    <div class="wrapper">
+        <main>
+            <h2>Article title</h2>
+            <p>
+                This dissertation joins a vibrant conversation in the social sciences about the challenging nature of care labor as well as feminist discussions about the role of the daughter in Victorian culture.
+            </p>
+            <p>
+                It explores the literary presence of the middle class managing daughter in the Victorian home.  Collectively, the novels in this study articulate social anxieties about the unclear and unstable role of daughters in the family, the physically and emotionally challenging work they, and all women, do, and the struggle for daughters to find a place in a family hierarchy, which is often structured not by effort or affection, but by proscribed traditional roles, which do not easily adapt to managing daughters, even if they are the ones holding the family together.
+            </p>
+            <p>
+                The managing daughter is a problem not accounted for in any conventional domestic structure or ideology so there is no role, no clear set of responsibilities and no boundaries that could, and arguably should, define her obligations, offer her opportunities for empowerment, or set necessary limits on the broad cultural mandate she has to comfort and care others.
+            </p>
+            <p>
+                The extremes she is often pushed to reveals the stresses and hidden conflicts for authority and autonomy inherent in domestic labor without the iconic angel in the house rhetoric that so often masks the difficulties of domestic life for women. She gains no authority or stability no matter how loving or even how necessary she is to a family because there simply is no position in the parental family structure for her.  The managing daughter thus reveals a deep crack in the structure of the traditional Victorian family by showing that it often cannot accommodate, protect, or validate a loving non-traditional family member because it values traditional hierarchies over emotion or effort.  Yet, in doing so, it also suggests that if it is position not passion that matters, then as long as a woman assumes the right position in the family then deep emotional connections to others are not necessary for her to care competently for others
+            </p>
+            <p>
+                This dissertation joins a vibrant conversation in the social sciences about the challenging nature of care labor as well as feminist discussions about the role of the daughter in Victorian culture.
+            </p>
+            <p>
+                It explores the literary presence of the middle class managing daughter in the Victorian home.  Collectively, the novels in this study articulate social anxieties about the unclear and unstable role of daughters in the family, the physically and emotionally challenging work they, and all women, do, and the struggle for daughters to find a place in a family hierarchy, which is often structured not by effort or affection, but by proscribed traditional roles, which do not easily adapt to managing daughters, even if they are the ones holding the family together.
+            </p>
+        </main>
+        <aside class="sidebar">
+            <div class="widget is-sticky">
+                <h2>Ad</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur.</p>
+            </div>
+            <div class="widget">
+                <h2>Article</h2>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+            </div>
+            <div class="widget">
+                <h2>Article</h2>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+            </div>
+        </aside>
+    </div>
+    <footer>Footer</footer>
+</div>
+
+<script src="../src/sticksy.js"></script>
+<script>
+    new Sticksy('.widget.is-sticky')
+</script>
+</body>
+</html>

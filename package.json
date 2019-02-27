@@ -1,0 +1,21 @@
+{
+  "name": "sticksy",
+  "version": "0.0.9",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "release": "uglifyjs ./src/sticksy.js --compress --mangle --mangle-props regex=/^_/ --source-map --output ./dist/sticksy.min.js"
+  },
+  "keywords": [
+    "sticky",
+    "fixed",
+    "sidebar",
+    "widget",
+    "element"
+  ],
+  "author": "Artem Kovalchuk",
+  "license": "MIT",
+  "devDependencies": {
+    "uglify-js": "^3.4.9"
+  }
+}
