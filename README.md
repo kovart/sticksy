@@ -35,9 +35,9 @@ But also you can use it for some design features.
    * Small size ~1.6Kb (minified gzip)
    
 ## Examples
-  - [Basic usage]()
-  - [Usage with JQuery or Zepto]()
-  - [Same selector for multiple items]()
+  - [Basic usage](https://codepen.io/kovart/pen/VReGjN)
+  - [Usage with JQuery or Zepto](https://codepen.io/kovart/pen/OqMrvR)
+  - [Same selector for multiple items](https://codepen.io/kovart/pen/eXJxQY)
  
 ## Installation
 You can install Sticksy from NPM, Yarn or just simply download it from this page.
