@@ -30,7 +30,9 @@ window.Sticksy = (function () {
      * @constructor
      */
     function Constructor(target, options) {
-        if (!target) throw new Error("You have to specify target parameter")
+        if (!target) throw new Error("You have to specify the target element")
+        if(typeof target !== 'string' && !(target instanceof Element))
+            throw new Error('Expected a string or element, but got: ' + Object.prototype.toString.call(target))
         var targetEl = Utils.findElement(target)
         if (!targetEl) throw new Error("Cannot find target element: " + target)
         var containerEl = targetEl.parentNode
@@ -282,9 +284,9 @@ window.Sticksy = (function () {
         if(typeof target === 'undefined') throw new Error("'target' parameter is undefined")
 
         var elements = []
-        if(target.length === 1 && target instanceof Element) {
+        if(target instanceof Element) {
             elements = [target]
-        } else if(target.length > 1 && target[0] instanceof Element) {
+        } else if(typeof target.length !== 'undefined' && target.length > 0 && target[0] instanceof Element) {
             // check if JQuery object and fetch native DOM elements
             elements = typeof target.get === 'function' ? target.get() : target
         } else if(typeof target === 'string') {
