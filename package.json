@@ -1,7 +1,7 @@
 {
   "name": "sticksy",
   "version": "0.0.9",
-  "description": "",
+  "description": "Sticksy is a library for making cool things like fixed widgets \uD83D\uDE0E",
   "main": "index.js",
   "scripts": {
     "release": "uglifyjs ./src/sticksy.js --compress --mangle --mangle-props regex=/^_/ --source-map --output ./dist/sticksy.min.js"
@@ -13,6 +13,13 @@
     "widget",
     "element"
   ],
+  "repository": {
+    "url": "https://github.com/kovart/sticksy",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/kovart/sticksy/issues"
+  },
   "author": "Artem Kovalchuk",
   "license": "MIT",
   "devDependencies": {

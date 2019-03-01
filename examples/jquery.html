@@ -81,7 +81,7 @@
                 <h2>Article</h2>
                 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
             </div>
-            <div class="widget">
+            <div class="widget is-sticky">
                 <h2>Article</h2>
                 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
             </div>
@@ -90,9 +90,10 @@
     <footer>Footer</footer>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="../src/sticksy.js"></script>
 <script>
-    new Sticksy('.widget.is-sticky')
+    $('.widget.is-sticky').sticksy()
 </script>
 </body>
 </html>

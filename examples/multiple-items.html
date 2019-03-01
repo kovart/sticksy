@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Multiple items example</title>
+    <style>
+        body { height: 200vh; margin: 0; }
+        .wrapper { display: flex; justify-content: center; }
+        .container {
+            height: 95vh;
+            margin: 0.3em;
+            border: 1px solid grey;
+        }
+        .block {
+            width: 8em;
+            height: 8em;
+            margin: 0.8em;
+            border: 1px dashed #afafaf;
+        }
+        .block.is-sticky {
+            border-color: red;
+        }
+        .block.is-big {
+            height: 10em;
+        }
+        .block.is-small {
+            height: 6em;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="container1" class="container">
+            <div class="block"></div>
+            <div class="block is-sticky"></div>
+            <div class="block"></div>
+        </div>
+        <div id="container2" class="container">
+            <div class="block is-big"></div>
+            <div class="block is-small"></div>
+            <div class="block is-sticky"></div>
+        </div>
+        <div id="container3" class="container ">
+            <div class="block is-sticky"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+        </div>
+        <div id="container4" class="container">
+            <div class="block"></div>
+            <div class="block is-sticky is-big"></div>
+            <div class="block"></div>
+        </div>
+    </div>
+    <script src="../src/sticksy.js"></script>
+    <script>
+        Sticksy.initializeAll('.is-sticky')
+        // new Sticksy('#container1 .block.is-sticky')
+        // new Sticksy('#container2 .block.is-sticky')
+        // new Sticksy('#container3 .block.is-sticky')
+        // new Sticksy('#container4 .block.is-sticky')
+    </script>
+</body>
+</html>

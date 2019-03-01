@@ -1,9 +1,9 @@
 /**
  * Sticksy.js
- * A library that makes sticky elements that move lower siblings down.
+ * A library for making cool things like fixed widgets.
  * Dependency-free. ES5 code.
  * -
- * @version 0.0.8
+ * @version 0.0.9
  * @url https://github.com/kovart/sticksy
  * @author Artem Kovalchuk <kovart.dev@gmail.com>
  * @license The MIT License (MIT)
@@ -271,6 +271,42 @@ window.Sticksy = (function () {
         }
     }
 
+    /**
+     * Initializes sticky elements
+     * @param {string|Element|Element[]|jQuery} target - Query string, DOM elements or JQuery object
+     * @param {{topSpacing: number=, listen: boolean=}=} options - Constructor options
+     * @param {boolean=} ignoreNothingFound - Don't throw an error if there are no elements that satisfying selector.
+     * @returns {(Constructor)[]}
+     */
+    Constructor.initializeAll = function(target, options, ignoreNothingFound){
+        if(typeof target === 'undefined') throw new Error("'target' parameter is undefined")
+
+        var elements = []
+        if(target.length === 1 && target instanceof Element) {
+            elements = [target]
+        } else if(target.length > 1 && target[0] instanceof Element) {
+            // check if JQuery object and fetch native DOM elements
+            elements = typeof target.get === 'function' ? target.get() : target
+        } else if(typeof target === 'string') {
+            elements = document.querySelectorAll(target) || []
+        }
+
+        // There may be situations when we have several sticky elements in one parent
+        // To resolve this situation we take only the first element
+        var parents = []
+        var stickyElements = []
+        elements.forEach(function (el) {
+            if(parents.indexOf(el.parentNode) !== -1) return
+            parents.push(el.parentNode)
+            stickyElements.push(el)
+        })
+
+        if(!ignoreNothingFound && !stickyElements.length) throw new Error('There are no elements to initialize')
+        return stickyElements.map(function (el) {
+            return new Constructor(el, options)
+        })
+    }
+
     /* ------------------------
      *  Refresh events
      * ------------------------ */
@@ -314,10 +350,10 @@ window.Sticksy = (function () {
     return Constructor
 }());
 
-// Jquery Support
+// Jquery Injection
 var jQueryPlugin = window.$ || window.jQuery || window.Zepto
 if (jQueryPlugin) {
     jQueryPlugin.fn.sticksy = function sticksyPlugin (opts) {
-        return new Sticksy(this, opts)
+        return Sticksy.initializeAll(this, opts)
     }
 }
