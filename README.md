@@ -9,7 +9,7 @@
   </a>
 </p>
 
-Sticksy is a library for making cool things like fixed widgets.
+Sticksy is a zero-dependency library for making cool things like fixed widgets.
 It makes an element and its lower siblings sticky.
 
 > Sticksy **is not** a `position: sticky` polyfill. Sticksy **_affects_** on the sibling elements.
