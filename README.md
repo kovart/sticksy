@@ -1,4 +1,4 @@
-<h1 align="left">Sticksy.js 📌</h1>
+<h1 align="left">Sticksy.js 📌</h1>  
 
 <p align="left">
   <a href="https://www.npmjs.com/package/sticksy">
@@ -86,7 +86,7 @@ var stickyElement = $('.widget.is-sticky').sticksy();
 
 ------
 
-### Same selector for multiple items 
+#### Same selector for multiple items 
 ```js
 var stickyElements = Sticksy.initializeAll('.is-sticky')
 ```
@@ -96,41 +96,93 @@ var stickyElements = Sticksy.initializeAll('.is-sticky')
 More examples in [`example folder`](https://github.com/kovart/sticksy/examples) and [`this section`](https://github.com/kovart/sticksy#examples).
 
 ## API
-The API is simple.
+The API is as simple as possible.
 
-#### Constructor options
+### Constructor options
 ```js
-var stickyEl = new Sticksy(selector /* or element */, {
-    topSpacing: 60, // Specify this when you have a fixed top panel | default: 0
-    listen: true, // Listen for the DOM changes in the container | default: false
+var instance = new Sticksy(target[, options]);
+```
+Example:
+```js
+var stickyEl = new Sticksy('.block.is-sticky', {
+    topSpacing: 60, // Specify this when you have a fixed top panel
+    listen: true, // Listen for the DOM changes in the container
 });
 ```
-#### Public methods
+
+#### target: string | Element
+`Required`\
+Specify a target sticky element. This option can take a string query or the element itself. 
+
+#### options: ContructorOptions
+`Optional`\
+Sticksy comes with options to configure how it works. All options below are optional.
+
+##### topSpacing: number
+`Optional` `Default: 0`\
+Additional top spacing of the element when it becomes fixed (sticky). Use this option when you have a fixed top panel.
+
+##### listen: boolean
+`Optional` `Default: false`\
+This option determines should we recalculate all cached dimensions of the viewport, container and sticky elements on any DOM **changes in the container element**.
+> Unfortunately, we cannot react to changes in the style attribute in sticky elements. The library uses the style attribute to make elements sticky and if we react all the time the attribute changes it will cause a performance leak.
+
+
+### Public methods
+#### refresh(): void
+Force recalculation of elements state and update position of sticky elements according to the new state.
 ```js
-// Used when you need to update the state of elements
 stickyEl.refresh();
-// Used when you need to recalculate all
+```
+#### hardRefresh(): void
+The same as `refresh()`, but force recalculation of **all cached dimensions** of the viewport, container and sticky elements.
+```js
 stickyEl.hardRefresh();
 ```
-#### Events
+
+### Events
+
+#### onStateChanged
+Called when the state of sticky elements has changed. There are three states of sticky elements: static, fixed and stuck. 
 ```js
 stickyEl.onStateChanged = function(state){
   // your handler here
 }
 ```
 ---
-#### Static methods
+### Static methods
+
+#### refreshAll(): void
+Calls `refresh()` method for all instances.
 ```js
-// Calls refresh() method for all instances 
 Sticksy.refreshAll();
-// Calls hardRefresh() method for all instances
+```
+#### hardRefreshAll(): void
+Calls `hardRefresh()` method for all instances.
+```js
 Sticksy.hardRefreshAll();
 ```
 
-#### Helper methods
+### Helper methods
+#### initializeAll(target, options, ignoreNothingFound)
+Find and initialize all instances with the same options.
+
+Example:
 ```js
-Sticksy.initializeAll(selector, options, ignoreNothingFound);
+var stickyEl = Sticksy.initializeAll('.is-sticky', { listen: true }, true)
 ```
+
+##### target: string | Element | Element[] | jQuery
+`Required`\
+Specify target sticky elements. 
+
+##### options: ContructorOptions
+`Optional`\
+See the [`Contructor`](#constructor-options) options. 
+
+##### ignoreNothingFound: boolean
+`Optional` `Default: false`\
+Should the method throw an error if no elements found. 
 
 ## Performance
 Performance is ultra high. ⚡
