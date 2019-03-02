@@ -16,7 +16,7 @@ It makes an element and its lower siblings sticky.
 
 <br/>
 <p align="center">
-  <img alt="Fixed widgets in sidebar" src="./docs/demo.gif"></img>
+  <img alt="Fixed widgets in sidebar" src="../assets/demo.gif?raw=true"></img>
 </p>
 
 ## When do you need Sticksy? 
