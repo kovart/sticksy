@@ -93,7 +93,7 @@ var stickyElements = Sticksy.initializeAll('.is-sticky')
 
 ------
 
-More examples in [`example folder`](https://github.com/kovart/sticksy/examples) and [`this section`](https://github.com/kovart/sticksy#examples).
+More examples in [`example folder`](https://github.com/kovart/sticksy/tree/master/examples) and [`this section`](#examples).
 
 ## API
 The API is as simple as possible.
