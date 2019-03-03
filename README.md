@@ -16,7 +16,7 @@ It makes an element and its lower siblings sticky.
 
 <br/>
 <p align="center">
-  <img alt="Fixed widgets in sidebar" src="../assets/demo.gif?raw=true"></img>
+  <img alt="Fixed widgets in sidebar" src="https://github.com/kovart/sticksy/raw/assets/demo.gif?raw=true"></img>
 </p>
 
 ## When do you need Sticksy? 
@@ -111,7 +111,7 @@ var stickyEl = new Sticksy('.block.is-sticky', {
 ```
 
 #### target: string | Element
-Specify a target sticky element. This option can take a string query or the element itself. \ 
+Specify a target sticky element. This option can take a string query or the element itself. <br> 
 `Required`
 
 #### options: ContructorOptions
@@ -123,8 +123,10 @@ Additional top spacing of the element when it becomes fixed (sticky). Use this o
 `Optional` `Default: 0`
 
 ##### listen: boolean
-This option determines should we recalculate all cached dimensions of the viewport, container and sticky elements on any DOM **changes in the container element**. \
-`Optional` `Default: false`
+This option determines should we recalculate all cached dimensions of the viewport, container and sticky elements on any DOM **changes in the container element**. 
+
+`Optional` `Default: false` 
+
 > Unfortunately, we cannot react to changes in the style attribute in sticky elements. The library uses the style attribute to make elements sticky and if we react all the time the attribute changes it will cause a performance leak.
 
 
@@ -177,12 +179,12 @@ Specify target sticky elements. \
 `Required`
 
 ##### options: ContructorOptions
-See the [`Contructor options`](#constructor-options). \
+Options for the target elements. See [`Contructor options`](#constructor-options). \
 `Optional`
 
 ##### ignoreNothingFound: boolean
-`Optional` `Default: false`\
-Should the method throw an error if no elements found. 
+Should the method throw an error if no elements found. \
+`Optional` `Default: false`
 
 ## Performance
 Performance is ultra high. ⚡
