@@ -111,20 +111,20 @@ var stickyEl = new Sticksy('.block.is-sticky', {
 ```
 
 #### target: string | Element
-`Required`\
-Specify a target sticky element. This option can take a string query or the element itself. 
+Specify a target sticky element. This option can take a string query or the element itself. \ 
+`Required`
 
 #### options: ContructorOptions
-`Optional`\
-Sticksy comes with options to configure how it works. All options below are optional.
+Sticksy comes with options to configure how it works. All options below are optional. \
+`Optional`
 
 ##### topSpacing: number
-`Optional` `Default: 0`\
-Additional top spacing of the element when it becomes fixed (sticky). Use this option when you have a fixed top panel.
+Additional top spacing of the element when it becomes fixed (sticky). Use this option when you have a fixed top panel. \
+`Optional` `Default: 0`
 
 ##### listen: boolean
-`Optional` `Default: false`\
-This option determines should we recalculate all cached dimensions of the viewport, container and sticky elements on any DOM **changes in the container element**.
+This option determines should we recalculate all cached dimensions of the viewport, container and sticky elements on any DOM **changes in the container element**. \
+`Optional` `Default: false`
 > Unfortunately, we cannot react to changes in the style attribute in sticky elements. The library uses the style attribute to make elements sticky and if we react all the time the attribute changes it will cause a performance leak.
 
 
@@ -164,7 +164,7 @@ Sticksy.hardRefreshAll();
 ```
 
 ### Helper methods
-#### initializeAll(target, options, ignoreNothingFound)
+#### initializeAll(target[, options][, ignoreNothingFound])
 Find and initialize all instances with the same options.
 
 Example:
@@ -173,12 +173,12 @@ var stickyEl = Sticksy.initializeAll('.is-sticky', { listen: true }, true)
 ```
 
 ##### target: string | Element | Element[] | jQuery
-`Required`\
-Specify target sticky elements. 
+Specify target sticky elements. \
+`Required`
 
 ##### options: ContructorOptions
-`Optional`\
-See the [`Contructor`](#constructor-options) options. 
+See the [`Contructor options`](#constructor-options). \
+`Optional`
 
 ##### ignoreNothingFound: boolean
 `Optional` `Default: false`\
