@@ -1,6 +1,6 @@
 {
   "name": "sticksy",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "Sticksy is a library for making cool things like fixed widgets 😎",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "sidebar",
     "widget",
     "element",
-	"jquery"
+    "jquery"
   ],
   "repository": {
     "url": "https://github.com/kovart/sticksy",

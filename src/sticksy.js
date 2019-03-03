@@ -3,7 +3,7 @@
  * A library for making cool things like fixed widgets.
  * Dependency-free. ES5 code.
  * -
- * @version 0.0.9
+ * @version 0.1.0
  * @url https://github.com/kovart/sticksy
  * @author Artem Kovalchuk <kovart.dev@gmail.com>
  * @license The MIT License (MIT)
