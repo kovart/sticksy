@@ -103,9 +103,11 @@ window.Sticksy = (function () {
                 // Dirty check if something has changed
                 // Used to avoid hardRefresh() when we change 'position' style in sticky nodes
                 mutations.forEach(function (mutation) {
-                    if (that._stickyNodes.indexOf(mutation.target) === -1 || mutation.attributeName !== 'style') {
-                        that.hardRefresh()
+                    if((that._dummyNodes.indexOf(mutation.target) !== -1 && mutation.attributeName === 'style') ||
+                        (that._stickyNodes.indexOf(mutation.target) !== -1 && mutation.attributeName === 'style')){
+                        return
                     }
+                    that.hardRefresh()
                 })
             });
 
