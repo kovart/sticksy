@@ -53,7 +53,7 @@ $ npm install sticksy --save
 ```
 ### Yarn
 ```sh
-$ yarn install sticksy
+$ yarn add sticksy
 ```
 
 ### Github
