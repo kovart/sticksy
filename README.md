@@ -1,13 +1,11 @@
 <h1 align="left">Sticksy.js 📌</h1>  
 
-<p align="left">
-  <a href="https://www.npmjs.com/package/sticksy">
-    <img alt="npm version" src="https://badge.fury.io/js/sticksy.svg" />
-  </a>
-  <a href="https://unpkg.com/sticksy@latest/dist/sticksy.min.js">
-    <img alt="unpkg" src="https://img.shields.io/badge/unpkg-link-blue.svg">
-  </a>
-</p>
+[![npm](https://badge.fury.io/js/sticksy.svg)](https://www.npmjs.com/package/sticksy)
+[![gzip size](https://badgen.net/badgesize/gzip/https://unpkg.com/sticksy@latest/dist/sticksy.min.js)](https://cdn.jsdelivr.net/npm/sticksy/dist/sticksy.min.js)
+[![install size](https://packagephobia.now.sh/badge?p=sticksy)](https://packagephobia.now.sh/result?p=sticksy)
+[![issues](https://badgen.net/github/open-issues/kovart/sticksy)](https://github.com/kovart/sticksy/issues)
+[![snyk](https://snyk.io/test/npm/sticksy/badge.svg)](https://snyk.io/test/npm/sticksy)
+[![license](https://badgen.net/npm/license/lodash)](https://opensource.org/licenses/MIT)
 
 Sticksy is a zero-dependency library for making cool things like fixed widgets.
 It makes an element and its lower siblings sticky.
