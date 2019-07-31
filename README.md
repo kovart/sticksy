@@ -2,15 +2,21 @@
 
 [![npm](https://badge.fury.io/js/sticksy.svg)](https://www.npmjs.com/package/sticksy)
 [![gzip size](https://badgen.net/badgesize/gzip/https://unpkg.com/sticksy@latest/dist/sticksy.min.js)](https://cdn.jsdelivr.net/npm/sticksy/dist/sticksy.min.js)
-[![install size](https://packagephobia.now.sh/badge?p=sticksy)](https://packagephobia.now.sh/result?p=sticksy)
 [![issues](https://badgen.net/github/open-issues/kovart/sticksy)](https://github.com/kovart/sticksy/issues)
+[![downloads](https://badgen.net/npm/dm/sticksy)](https://www.npmjs.com/package/sticksy)
 [![snyk](https://snyk.io/test/npm/sticksy/badge.svg)](https://snyk.io/test/npm/sticksy)
 [![license](https://badgen.net/npm/license/lodash)](https://opensource.org/licenses/MIT)
 
-Sticksy is a zero-dependency library for making cool things like fixed widgets.
-It makes an element and its lower siblings sticky.
+Sticksy is a **zero-dependency** JavaScript library for making cool things like **fixed widgets**. It's simple and ultra fast. ⚡\
+Unlike [**Q2W3 WordPress Plugin**](https://wordpress.org/plugins/q2w3-fixed-widget/), you don't need WordPress, jQuery, or other stuff. **You can use it in any web project.**  
 
-> Sticksy **is not** a `position: sticky` polyfill. Sticksy **_affects_** on the sibling elements.
+Just import and setup in one line:
+```javascript
+var styleEl = new Sticksy('.widget.is-sticky') // and that's all!
+```
+
+
+> ⚠️ Sticksy **is not** a `position: sticky` polyfill. Sticksy **_affects_** on the sibling elements.
 
 <br/>
 <p align="center">
@@ -23,13 +29,13 @@ It makes an element and its lower siblings sticky.
 The library is especially useful for ads or other items that visitors want to interact with.
 Sticky blocks are perceived much better by your visitors than unfixed widgets and therefore they have a significantly higher click-through rate. 
 
-But also you can use it for some design features.
+*But also you can use it for some design features.*
 
 ## Why Sticksy is awesome?
    * Setup in one line
    * Super performance
-   * Ready for DOM changes
    * Zero dependencies
+   * Reacts to DOM changes 
    * Small size ~1.6Kb (minified gzip)
    
 ## Examples
@@ -38,11 +44,12 @@ But also you can use it for some design features.
   - [Same selector for multiple items](https://codepen.io/kovart/pen/eXJxQY)
  
 ## Installation
-You can install Sticksy from NPM, Yarn or just simply download it from this page.
+You can simply install the library from CDN, NPM, Yarn or just download it from this repo.
 
-Import an entire module if you use Webpack, Rollup or other module bundlers:  
-```js
-import 'sticksy';
+### CDN
+Just insert this on your page:
+```html
+<script src="https://cdn.jsdelivr.net/npm/sticksy/dist/sticksy.min.js"></script>
 ```
 
 ### NPM
@@ -54,39 +61,64 @@ $ npm install sticksy --save
 $ yarn add sticksy
 ```
 
-### Github
-<a href="https://github.com/kovart/sticksy/releases">Download the latest release</a> and add `<script src="your-path/sticksy.min.js"></script>` to your page.
+------
+
+🧱 Import an entire module if you use Webpack, Rollup or other module bundlers:  
+```js
+import 'sticksy';
+```
   
 ## Usage
-HTML structure should look like this:
+Watch an example. 
 ```html
 <!-- Container -->
+<aside class="sidebar"> 
+	<!-- Non sticky element -->
+    <div class="widget"></div>
+    <!-- Sticky element -->
+    <div class="widget is-sticky"></div> 
+    <!-- Now, the next elements are sticky also -->
+    <div class="widget"></div> 
+    <div class="widget"></div> 
+</aside>
+```
+*⚠️ The container shouldn't be absolutely positioned as we use absolute position to stuck the elements to the bottom.*
+
+Then you should initialize an instance with a **new** keyword (it's important):
+```js
+var stickyElement = new Sticksy('.widget.is-sticky');
+```
+That's all 😎
+
+------
+
+#### Same selector for multiple containers 
+It is helpful if you have, for example, two sidebars with the same CSS classes.
+```html
 <aside class="sidebar"> 
     <div class="widget"></div>
     <!-- Sticky element -->
     <div class="widget is-sticky"></div> 
 </aside>
+<main> 
+	<!-- Some content here --> 
+</main>
+<aside class="sidebar"> 
+    <div class="widget is-sticky"></div>
+    <!-- Sticky element -->
+    <div class="widget "></div> 
+</aside>
 ```
-*The container shouldn't be absolute positioned, because we use absolute position to stuck elements to the bottom.*
 
-Then you should initialize an instance with a **new** keyword:
 ```js
-var stickyElement = new Sticksy('.widget.is-sticky');
+var stickyElements = Sticksy.initializeAll('.is-sticky')
 ```
-That's all. 😎
 
 ------
 
 #### Via JQuery/Zepto:
 ```js
 var stickyElement = $('.widget.is-sticky').sticksy();
-```
-
-------
-
-#### Same selector for multiple items 
-```js
-var stickyElements = Sticksy.initializeAll('.is-sticky')
 ```
 
 ------
@@ -109,7 +141,7 @@ var stickyEl = new Sticksy('.block.is-sticky', {
 ```
 
 #### target: string | Element
-Specify a target sticky element. This option can take a string query or the element itself. <br> 
+Specify a target sticky element. You can pass here a string query or the target element. <br> 
 `Required`
 
 #### options: ContructorOptions
@@ -117,25 +149,28 @@ Sticksy comes with options to configure how it works. All options below are opti
 `Optional`
 
 ##### topSpacing: number
-Additional top spacing of the element when it becomes fixed (sticky). Use this option when you have a fixed top panel. \
+Additional top spacing for the top sticky element when it becomes fixed (sticky). Use this option when you have a fixed top panel. \
 `Optional` `Default: 0`
 
 ##### listen: boolean
-This option determines should we recalculate all cached dimensions of the viewport, container and sticky elements on any DOM **changes in the container element**. 
+Should we recalculate all cached dimensions of the viewport, container and sticky elements on any DOM **changes in the container element**. 
 
 `Optional` `Default: false` 
 
-> Unfortunately, we cannot react to changes in the style attribute in sticky elements. The library uses the style attribute to make elements sticky and if we react all the time the attribute changes it will cause a performance leak.
+> Unfortunately, we cannot react to changes in the style attribute of sticky elements. 
+>The library uses the style attribute to make elements sticky and 
+>if we react all the time the attribute changes it will cause a performance leak.
 
 
-### Public methods
+### Instance methods
 #### refresh(): void
-Force recalculation of elements state and update position of sticky elements according to the new state.
+Recalculate elements state and update position of sticky elements according to the new state. \
+Call it in case the library must refresh its state but for some reason this did not happen.
 ```js
 stickyEl.refresh();
 ```
 #### hardRefresh(): void
-The same as `refresh()`, but force recalculation of **all cached dimensions** of the viewport, container and sticky elements.
+The same as `refresh()`, but recalculates **all cached dimensions** of the viewport, container and sticky elements.
 ```js
 stickyEl.hardRefresh();
 ```
@@ -143,22 +178,24 @@ stickyEl.hardRefresh();
 ### Events
 
 #### onStateChanged
-Called when the state of sticky elements has changed. There are three states of sticky elements: static, fixed and stuck. 
+Called when the state of element has changed. 
+The state can be: `static`, `fixed` and `stuck`. 
 ```js
 stickyEl.onStateChanged = function(state){
   // your handler here
+  if (state === 'fixed') alert('it's fixed!')
 }
 ```
 ---
 ### Static methods
 
 #### refreshAll(): void
-Calls `refresh()` method for all instances.
+Call `refresh()` method for the all instances.
 ```js
 Sticksy.refreshAll();
 ```
 #### hardRefreshAll(): void
-Calls `hardRefresh()` method for all instances.
+Call `hardRefresh()` method for the all instances.
 ```js
 Sticksy.hardRefreshAll();
 ```
@@ -169,11 +206,11 @@ Find and initialize all instances with the same options.
 
 Example:
 ```js
-var stickyEl = Sticksy.initializeAll('.is-sticky', { listen: true }, true)
+var stickyElems = Sticksy.initializeAll('.is-sticky', { listen: true }, true)
 ```
 
 ##### target: string | Element | Element[] | jQuery
-Specify target sticky elements. \
+Target element(s). \
 `Required`
 
 ##### options: ContructorOptions
@@ -198,8 +235,8 @@ Constructor.prototype._calcState = function (windowOffset) {
     return STATES.Fixed
 }
 ```
-The function doesn't have any сomplicated calculations, just compares two variables.\
-And if the calculated state is the same as previous the library does nothing.
+The function doesn't have any сomplicated calculations. It just compares two variables. Not more. \
+If the calculated state is **the same** as previous the library **does nothing**.
 
 Cool, right? 🙂
   
