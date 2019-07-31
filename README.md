@@ -73,7 +73,7 @@ Watch an example.
 ```html
 <!-- Container -->
 <aside class="sidebar"> 
-	<!-- Non sticky element -->
+    <!-- Non sticky element -->
     <div class="widget"></div>
     <!-- Sticky element -->
     <div class="widget is-sticky"></div> 
