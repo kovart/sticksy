@@ -130,8 +130,8 @@ var stickyEl = new Sticksy('.block.is-sticky', {
     listen: true, // Listen for the DOM changes in the container
 });
 ```
-⚠️ **Beware! Since the library uses style attribute to change elements position,
-it ignores any changes in style attributes of sticky elements.**
+> Beware! Since the library uses style attribute to change elements position,
+> it ignores any changes in style attributes of sticky elements.
 ------
 
 #### Via JQuery/Zepto:
