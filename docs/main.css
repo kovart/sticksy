@@ -108,11 +108,12 @@ hr {
 pre, code {
     padding: .5rem 1rem;
     font-size: 0.8rem;
-    background: #F0F0F0;
+    background: #f6f6f6;
 }
 
 code {
     font-family: "Inconsolata", monospace;
+    background: #f6f6f6 !important;
 }
 
 .container {

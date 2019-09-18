@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="us">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sticksy.js - Basic example</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <header>Header</header>
+    <div class="wrapper">
+        <main>
+            <h2>Article title</h2>
+            <p>
+                This dissertation joins a vibrant conversation in the social sciences about the challenging nature of care labor as well as feminist discussions about the role of the daughter in Victorian culture.
+            </p>
+            <p>
+                It explores the literary presence of the middle class managing daughter in the Victorian home.  Collectively, the novels in this study articulate social anxieties about the unclear and unstable role of daughters in the family, the physically and emotionally challenging work they, and all women, do, and the struggle for daughters to find a place in a family hierarchy, which is often structured not by effort or affection, but by proscribed traditional roles, which do not easily adapt to managing daughters, even if they are the ones holding the family together.
+            </p>
+            <p>
+                The managing daughter is a problem not accounted for in any conventional domestic structure or ideology so there is no role, no clear set of responsibilities and no boundaries that could, and arguably should, define her obligations, offer her opportunities for empowerment, or set necessary limits on the broad cultural mandate she has to comfort and care others.
+            </p>
+            <p>
+                The extremes she is often pushed to reveals the stresses and hidden conflicts for authority and autonomy inherent in domestic labor without the iconic angel in the house rhetoric that so often masks the difficulties of domestic life for women. She gains no authority or stability no matter how loving or even how necessary she is to a family because there simply is no position in the parental family structure for her.  The managing daughter thus reveals a deep crack in the structure of the traditional Victorian family by showing that it often cannot accommodate, protect, or validate a loving non-traditional family member because it values traditional hierarchies over emotion or effort.  Yet, in doing so, it also suggests that if it is position not passion that matters, then as long as a woman assumes the right position in the family then deep emotional connections to others are not necessary for her to care competently for others
+            </p>
+            <p>
+                This dissertation joins a vibrant conversation in the social sciences about the challenging nature of care labor as well as feminist discussions about the role of the daughter in Victorian culture.
+            </p>
+            <p>
+                It explores the literary presence of the middle class managing daughter in the Victorian home.  Collectively, the novels in this study articulate social anxieties about the unclear and unstable role of daughters in the family, the physically and emotionally challenging work they, and all women, do, and the struggle for daughters to find a place in a family hierarchy, which is often structured not by effort or affection, but by proscribed traditional roles, which do not easily adapt to managing daughters, even if they are the ones holding the family together.
+            </p>
+        </main>
+        <aside class="sidebar">
+            <div class="widget">
+                <h2>Article</h2>
+                <p>Lorem ipsum dolor sit amet, dolor sit.</p>
+            </div>
+            <div class="widget is-sticky">
+                <h2>Ad</h2>
+                <p>GET YOUR 100% FREE TRIAL</p>
+            </div>
+            <div class="widget">
+                <h2>Article</h2>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+            </div>
+        </aside>
+    </div>
+    <footer>Footer</footer>
+    <div class="filler">REALLY BIG BLOCK</div>
+</div>
+<script src="../sticksy.js"></script>
+<script>
+    var stickyEl = new Sticksy('.widget.is-sticky')
+    stickyEl.onStateChanged = function (state) {
+        if(state === 'fixed') stickyEl.nodeRef.classList.add('widget--sticky')
+        else stickyEl.nodeRef.classList.remove('widget--sticky')
+    }
+</script>
+</body>
+</html>

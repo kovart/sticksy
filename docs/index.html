@@ -5,34 +5,65 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134982632-3"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'UA-134982632-3');
     </script>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700|Montserrat:700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
+    <style>
+        .github-corner:hover .octo-arm {
+            animation: octocat-wave 560ms ease-in-out
+        }
+
+        @keyframes octocat-wave {
+            0%, 100% {
+                transform: rotate(0)
+            }
+            20%, 60% {
+                transform: rotate(-25deg)
+            }
+            40%, 80% {
+                transform: rotate(10deg)
+            }
+        }
+
+        @media (max-width: 500px) {
+            .github-corner:hover .octo-arm {
+                animation: none
+            }
+
+            .github-corner .octo-arm {
+                animation: octocat-wave 560ms ease-in-out
+            }
+        }
+    </style>
     <title>Sticksy.js</title>
 </head>
 <body>
 <div class="container">
     <div class="hero">
-
         <h1>
             <a href="./">
                 Sticksy.js <span role="img" aria-label="Pushpin">📌</span>
             </a>
         </h1>
         <p>
-            <a href="https://github.com/kovart/sticksy" target="_blank">Sticksy.js</a> is a zero-dependency JavaScript library for making
+            <a href="https://github.com/kovart/sticksy" target="_blank">Sticksy.js</a> is a zero-dependency JavaScript
+            library for making
             cool things like <strong>fixed widgets</strong>.
             It sticks elements to the top until they reaching the bottom.
-            Unlike <a href="https://wordpress.org/plugins/q2w3-fixed-widget/" style="color: var(--black)" target="_blank">Q2W3 WordPress Plugin</a>, you don't need
-            WordPress, jQuery, or other stuff. It's light, simple and ultra fast <span role="img" aria-label="Lightning"> ⚡</span>. <br>
+            Unlike <a href="https://wordpress.org/plugins/q2w3-fixed-widget/" style="color: var(--black)" target="_blank">Q2W3 WordPress Plugin</a>
+            , you don't need WordPress, jQuery, or other stuff. It's light, simple and ultra fast <span role="img" aria-label="Lightning"> ⚡</span>.
+            <br>
         </p>
         <p>
             Made with <span role="img" aria-label="Heart">❤️</span> by <a href="https://github.com/kovart" target="_blank">@kovart</a>.
@@ -40,8 +71,8 @@
             Licensed MIT.
         </p>
         <p style="margin-top: 2rem">
-            <a href="https://github.com/kovart/sticksy/releases/latest" class="button button--red"  target="_blank">DOWNLOAD</a>
-            <a href="https://github.com/kovart/sticksy/#api" class="button"  target="_blank">READ API</a>
+            <a href="https://github.com/kovart/sticksy/releases/latest" class="button button--red" target="_blank">DOWNLOAD</a>
+            <a href="https://github.com/kovart/sticksy/#api" class="button" target="_blank">READ API</a>
         </p>
     </div>
 </div>
@@ -50,7 +81,7 @@
     <pre><code class="js">var stickyEl = new Sticksy('.widget.is-sticky') // and that's all!</code></pre>
     <div class="demo">
         <div class="demo__title">Try in action</div>
-        <iframe class="demo__frame" src="../examples/basic.html" frameborder="0"></iframe>
+        <iframe class="demo__frame" src="frames/basic.html" frameborder="0"></iframe>
     </div>
     <p>
         <a href="https://github.com/kovart/sticksy/blob/master/examples/basic.html" target="_blank">View code</a>
@@ -58,11 +89,12 @@
     <hr/>
     <h2 id="difference">The difference from 'position: sticky'</h2>
     <p>
-        Stycksy.js is not a 'position: sticky' <a href="https://developer.mozilla.org/en-US/docs/Glossary/Polyfill">polyfill</a>. Sticksy affects on the sibling elements. Look at example below.
+        Sticksy.js is not a 'position: sticky' <a href="https://developer.mozilla.org/en-US/docs/Glossary/Polyfill">polyfill</a>.
+        Sticksy affects on the sibling elements. Look at example below.
     </p>
     <div class="demo">
         <div class="demo__title">The Difference</div>
-        <iframe class="demo__frame" src="difference.html" frameborder="0"></iframe>
+        <iframe class="demo__frame" src="frames/difference.html" frameborder="0"></iframe>
     </div>
     <p>
         <a href="https://github.com/kovart/sticksy/blob/master/docs/difference.html" target="_blank">View code</a>
@@ -93,7 +125,7 @@
     <p>
         <span role="img" aria-label="Warning">⚠️</span>
         <i> The container shouldn't be absolutely positioned as we use
-        absolute position to stuck the elements to the bottom.
+            absolute position to stuck the elements to the bottom.
         </i>
     </p>
     <p>
@@ -110,16 +142,18 @@ stickyEl.onStateChanged = function (state) {
 }</code></pre>
     <p>
         That's all. <span role="img" aria-label="Smiling Face With Sunglasses">😎</span>
-        See a full <a href="https://github.com/kovart/sticksy/blob/master/examples/basic.html" target="_blank">example here.</a>
+        See a full <a href="https://github.com/kovart/sticksy/blob/master/examples/basic.html" target="_blank">example
+        here.</a>
     </p>
     <h3 id="fixed-panel">Usage with Fixed Top Panel</h3>
     <p>If you have fixed top panel, you can easily deal with it by
-        <mark class="code">topSpacing</mark> option.
+        <mark class="code">topSpacing</mark>
+        option.
     </p>
     <pre><code class="js">var stickyEl = new Sticksy('.widget.is-sticky', {topSpacing: 70})</code></pre>
     <div class="demo">
         <div class="demo__title">Fixed panel example</div>
-        <iframe class="demo__frame" src="../examples/fixed-panel.html" frameborder="0"></iframe>
+        <iframe class="demo__frame" src="frames/fixed-panel.html" frameborder="0"></iframe>
     </div>
     <p>
         <a href="https://github.com/kovart/sticksy/blob/master/examples/fixed-panel.html" target="_blank">View code</a>
@@ -145,15 +179,18 @@ stickyEl.onStateChanged = function (state) {
     <pre><code class="js">var stickyElements = Sticksy.initializeAll('.is-sticky')</code></pre>
     <div class="demo">
         <div class="demo__title">Multiple items demo</div>
-        <iframe class="demo__frame" src="../examples/multiple-items.html" frameborder="0"></iframe>
+        <iframe class="demo__frame" src="frames/multiple-items.html" frameborder="0"></iframe>
     </div>
     <p><a href="https://github.com/kovart/sticksy/blob/master/examples/multiple-items.html" target="_blank">View code</a></p>
     <hr>
     <h3 id="dynamically-changing-elements">Dynamically changing elements</h3>
     <p>
         The library can detect changes of the container and its children.
-        It uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver" target="_blank">MutationObserver</a> for this.
-        If you want the library to react on DOM changes, you need to specify <mark class="code">listen</mark> option.
+        It uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver" target="_blank">MutationObserver</a>
+        for this.
+        If you want the library to react on DOM changes, you need to specify
+        <mark class="code">listen</mark>
+        option.
     </p>
     <pre><code class="js">var stickyEl = new Sticksy('.block.is-sticky', {
     listen: true, // Listen for the DOM changes in the container
@@ -175,7 +212,8 @@ stickyEl.onStateChanged = function (state) {
     <hr>
     <h2 id="compatibility">Browser Compatibility</h2>
     <p>
-        <a href="https://github.com/kovart/sticksy">Sticksy.js</a> works in all modern browsers including Internet Explorer 11.
+        <a href="https://github.com/kovart/sticksy">Sticksy.js</a>
+        works in all modern browsers including Internet Explorer 11.
         If you want the library to react on DOM changes and need to support IE10 or below,
         you should install <a href="https://github.com/megawac/MutationObserver.js">Mutation Observer Polyfill</a>.
     </p>
@@ -203,7 +241,9 @@ stickyEl.onStateChanged = function (state) {
     <h2 id="author">Author</h2>
     <p>
         Artem Kovalchuk <br/>
-        <a href="https://github.com/kovart" target="_blank">GitHub</a>. <a href="https://www.facebook.com/artem.kovalchuk" target="_blank">Facebook</a>. <a href="https://www.linkedin.com/in/kovart/" target="_blank">LinkedIn</a>.
+        <a href="https://github.com/kovart" target="_blank">GitHub</a>.
+        <a href="https://www.facebook.com/artem.kovalchuk" target="_blank">Facebook</a>.
+        <a href="https://www.linkedin.com/in/kovart/" target="_blank">LinkedIn</a>.
     </p>
     <hr>
     <h2 id="license">License</h2>
@@ -219,34 +259,8 @@ stickyEl.onStateChanged = function (state) {
               fill="currentColor" class="octo-body"></path>
     </svg>
 </a>
-<style>.github-corner:hover .octo-arm {
-    animation: octocat-wave 560ms ease-in-out
-}
-
-@keyframes octocat-wave {
-    0%, 100% {
-        transform: rotate(0)
-    }
-    20%, 60% {
-        transform: rotate(-25deg)
-    }
-    40%, 80% {
-        transform: rotate(10deg)
-    }
-}
-
-@media (max-width: 500px) {
-    .github-corner:hover .octo-arm {
-        animation: none
-    }
-
-    .github-corner .octo-arm {
-        animation: octocat-wave 560ms ease-in-out
-    }
-}</style>
-<link rel="stylesheet"
-      href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/atom-one-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>

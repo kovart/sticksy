@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sticksy.js - Multiple items</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inconsolata, "Helvetica", sans-serif;
+            /* fix freezing issue in iframes */
+            -webkit-backface-visibility: hidden;
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+        }
+
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .container {
+            min-height: 50rem;
+            flex: 1;
+            margin: 0.3rem;
+            border: 1px solid grey;
+        }
+
+        .filler {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            margin: 10px;
+            height: 95vh;
+            color: #d2d2d2;
+            border: 2px dashed #ffc4c4;
+        }
+
+        .block {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            height: 8rem;
+            margin: 10px;
+            border: 2px dotted #afafaf;
+        }
+
+        .block.is-sticky {
+            background: #f0f0f0;
+        }
+
+        .block.is-big {
+            height: 10rem;
+        }
+
+        .block.is-small {
+            height: 6rem;
+        }
+    </style>
+</head>
+<body>
+<h1>Move down ↓</h1>
+<hr>
+<div class="wrapper">
+    <div id="container1" class="container">
+        <div class="block"></div>
+        <div class="block is-sticky">😎</div>
+        <div class="block"></div>
+    </div>
+    <div id="container2" class="container">
+        <div class="block is-big"></div>
+        <div class="block is-small"></div>
+        <div class="block is-sticky">😎</div>
+    </div>
+    <div id="container3" class="container ">
+        <div class="block is-sticky">😎</div>
+        <div class="block"></div>
+        <div class="block"></div>
+    </div>
+    <div id="container4" class="container">
+        <div class="block"></div>
+        <div class="block is-sticky is-big">😎</div>
+        <div class="block"></div>
+    </div>
+</div>
+<div class="filler">REALLY BIG BLOCK</div>
+<script src="../sticksy.js"></script>
+<script>
+    Sticksy.initializeAll('.is-sticky', {listen: true})
+
+    // ... the same as
+    // new Sticksy('#container1 .block.is-sticky')
+    // new Sticksy('#container2 .block.is-sticky')
+    // new Sticksy('#container3 .block.is-sticky')
+    // new Sticksy('#container4 .block.is-sticky')
+</script>
+</body>
+</html>
