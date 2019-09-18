@@ -75,7 +75,7 @@ Watch an example.
 ```html
 <!-- Container -->
 <aside class="sidebar"> 
-	<!-- Non sticky element -->
+    <!-- Non sticky element -->
     <div class="widget"></div>
     <!-- Sticky element -->
     <div class="widget is-sticky"></div> 
@@ -111,8 +111,8 @@ It is helpful if you have, for example, two sidebars with the same CSS classes.
 	<!-- Some content here --> 
 </main>
 <aside class="sidebar"> 
-    <div class="widget is-sticky"></div>
     <!-- Sticky element -->
+    <div class="widget is-sticky"></div>
     <div class="widget "></div> 
 </aside>
 ```
