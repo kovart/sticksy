@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
+<header class="header header--fixed">Fixed Header</header>
 <div class="container">
-    <header>Header</header>
     <div class="wrapper">
         <main>
             <h2>Article title</h2>
@@ -50,7 +50,7 @@
 </div>
 <script src="../src/sticksy.js"></script>
 <script>
-    var stickyEl = new Sticksy('.widget.is-sticky')
+    var stickyEl = new Sticksy('.widget.is-sticky', {topSpacing: 70})
     stickyEl.onStateChanged = function (state) {
         if(state === 'fixed') stickyEl.nodeRef.classList.add('widget--sticky')
         else stickyEl.nodeRef.classList.remove('widget--sticky')

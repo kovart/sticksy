@@ -2,7 +2,7 @@
 <html lang="us">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sticksy.js - Basic example</title>
+    <title>Sticksy.js - State control example</title>
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
@@ -33,11 +33,11 @@
         <aside class="sidebar">
             <div class="widget">
                 <h2>Article</h2>
-                <p>Lorem ipsum dolor sit amet, dolor sit.</p>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
             </div>
             <div class="widget is-sticky">
                 <h2>Ad</h2>
-                <p>GET YOUR 100% FREE TRIAL</p>
+                <p>Lorem ipsum dolor sit amet, consectetur.</p>
             </div>
             <div class="widget">
                 <h2>Article</h2>
@@ -50,11 +50,13 @@
 </div>
 <script src="../src/sticksy.js"></script>
 <script>
-    var stickyEl = new Sticksy('.widget.is-sticky')
-    stickyEl.onStateChanged = function (state) {
-        if(state === 'fixed') stickyEl.nodeRef.classList.add('widget--sticky')
-        else stickyEl.nodeRef.classList.remove('widget--sticky')
-    }
+    var instance = new Sticksy('.widget.is-sticky')
+
+    setTimeout(function() { instance.disable(); alert('disabled') }, 5000)
+    setTimeout(function() { instance.enable(); alert('enabled') }, 10000)
+
+    // we can also use global Sticksy.disableAll() method
+    // Sticksy.disableAll();
 </script>
 </body>
 </html>

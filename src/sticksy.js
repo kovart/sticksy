@@ -3,7 +3,7 @@
  * A library for making cool things like fixed widgets.
  * Dependency-free. ES5 code.
  * -
- * @version 0.1.0
+ * @version 0.1.1
  * @url https://github.com/kovart/sticksy
  * @author Artem Kovalchuk <kovart.dev@gmail.com>
  * @license The MIT License (MIT)
@@ -23,15 +23,15 @@ window.Sticksy = (function () {
 
     /**
      * Constructor function for Sticksy
-     * @param {(string|Element)} target - Sticky element
-     * @param {Object=} options - Options object
-     * @param {boolean=} options.listen - Listen for DOM changes in container
-     * @param {number=} options.topSpacing - Top indent when element in 'fixed' state. E.g., indent from top panel
+     * @param {(string|Element)} target Sticky element or query
+     * @param {Object=} options Options object
+     * @param {boolean=} options.listen Listen for DOM changes in container
+     * @param {number=} options.topSpacing Top indent when element has 'fixed' state
      * @constructor
      */
     function Constructor(target, options) {
         if (!target) throw new Error("You have to specify the target element")
-        if(typeof target !== 'string' && !(target instanceof Element))
+        if (typeof target !== 'string' && !(target instanceof Element))
             throw new Error('Expected a string or element, but got: ' + Object.prototype.toString.call(target))
         var targetEl = Utils.findElement(target)
         if (!targetEl) throw new Error("Cannot find target element: " + target)
@@ -52,6 +52,11 @@ window.Sticksy = (function () {
          * @type {Function|null} Callback
          */
         this.onStateChanged = null
+        /**
+         * DOM Element reference of sticky element
+         * @type {Element} nodeRef
+         */
+        this.nodeRef = targetEl
 
         instances.push(this)
         this._initialize(this._props)
@@ -69,7 +74,7 @@ window.Sticksy = (function () {
         // The main idea of the library is that a sticky element makes lower elements sticky also
         // So we add lower siblings as they are sticky also
         var sibling = this._props.targetEl
-        while(sibling) {
+        while (sibling) {
             var clone = sibling.cloneNode(true)
             clone.style.visibility = 'hidden'
             clone.className += ' sticksy-dummy-node'
@@ -81,10 +86,10 @@ window.Sticksy = (function () {
             sibling = sibling.nextElementSibling
         }
 
-        // Used when we calc state of elements
+        // Used when we calc the state of elements
         this._stickyNodesHeight = 0
 
-        // Positions of the scroll when elements are fixed (sticky)
+        // Positions of the scroll when the elements are fixed (sticky)
         this._limits = {
             top: 0,
             bottom: 0
@@ -101,10 +106,10 @@ window.Sticksy = (function () {
         if (this._props.listen) {
             var mutationObserver = new MutationObserver(function (mutations) {
                 // Dirty check if something has changed
-                // Used to avoid hardRefresh() when we change 'position' style in sticky nodes
+                // Used to avoid hardRefresh() when we change style attribute in sticky nodes
                 mutations.forEach(function (mutation) {
-                    if((that._dummyNodes.indexOf(mutation.target) !== -1 && mutation.attributeName === 'style') ||
-                        (that._stickyNodes.indexOf(mutation.target) !== -1 && mutation.attributeName === 'style')){
+                    if ((that._dummyNodes.indexOf(mutation.target) !== -1 && mutation.attributeName === 'style') ||
+                        (that._stickyNodes.indexOf(mutation.target) !== -1 && mutation.attributeName === 'style')) {
                         return
                     }
                     that.hardRefresh()
@@ -129,7 +134,7 @@ window.Sticksy = (function () {
         return STATES.Fixed
     }
 
-    Constructor.prototype._updateStickyNodesHeight = function(){
+    Constructor.prototype._updateStickyNodesHeight = function () {
         this._stickyNodesHeight = Utils.getComputedBox(this._stickyNodes[this._stickyNodes.length - 1]).bottomWithMargin
             - Utils.getComputedBox(this._stickyNodes[0]).topWithMargin
     }
@@ -148,7 +153,7 @@ window.Sticksy = (function () {
     }
 
     /**
-     * Updates elements position
+     * Recalculate the position
      * @public
      */
     Constructor.prototype.refresh = function () {
@@ -156,8 +161,9 @@ window.Sticksy = (function () {
 
         if (state === this.state) return
 
-        // We enable dummy nodes last to avoid 'scrolling down effect' in Chrome
-        if(state === STATES.Static) {
+        // We enable dummy nodes at the end
+        // to avoid 'scrolling down effect' in Chrome
+        if (state === STATES.Static) {
             this._resetElements(this._stickyNodes)
             this._disableElements(this._dummyNodes)
         } else {
@@ -178,7 +184,7 @@ window.Sticksy = (function () {
     }
 
     /**
-     * Recalculates everything then update the position of elements
+     * Reset, recalculate and then update the position
      * @public
      */
     Constructor.prototype.hardRefresh = function () {
@@ -189,6 +195,26 @@ window.Sticksy = (function () {
         this._updateStickyNodesHeight()
         this._updateLimits()
         this.refresh()
+    }
+
+    /**
+     * Disable 'sticky' effect
+     * @public
+     */
+    Constructor.prototype.disable = function(){
+        this.state = STATES.Static
+        this._disableElements(this._dummyNodes)
+        this._resetElements(this._stickyNodes)
+        instances.splice(instances.indexOf(this), 1)
+    }
+
+    /**
+     * Enable 'sticky' effect
+     * @public
+     */
+    Constructor.prototype.enable = function(){
+        instances.push(this)
+        this.hardRefresh()
     }
 
     /* --------------------------
@@ -245,13 +271,13 @@ window.Sticksy = (function () {
     }
 
     Constructor.prototype._enableElements = function (elements) {
-        for(var i = 0; i < elements.length; i++){
+        for (var i = 0; i < elements.length; i++) {
             elements[i].style.display = getComputedStyle(this._stickyNodes[i]).display
         }
     }
 
-    Constructor.prototype._fixElementsSize = function() {
-        for(var i = 0; i < this._stickyNodes.length; i++) {
+    Constructor.prototype._fixElementsSize = function () {
+        for (var i = 0; i < this._stickyNodes.length; i++) {
             var stickyNode = this._stickyNodes[i]
             var style = getComputedStyle(stickyNode)
             stickyNode.style.width = style.width
@@ -275,23 +301,32 @@ window.Sticksy = (function () {
         }
     }
 
+    Constructor.disableAll = function(){
+        var copy = instances.slice()
+        for (var i = 0; i < copy.length; i++) {
+            instances[i].disable()
+        }
+    }
+
+    // Should we add enableAll method?
+
     /**
-     * Initializes sticky elements
+     * Initialize all sticky elements
      * @param {string|Element|Element[]|jQuery} target - Query string, DOM elements or JQuery object
      * @param {{topSpacing: number=, listen: boolean=}=} options - Constructor options
      * @param {boolean=} ignoreNothingFound - Don't throw an error if there are no elements that satisfying selector.
      * @returns {(Constructor)[]}
      */
-    Constructor.initializeAll = function(target, options, ignoreNothingFound){
-        if(typeof target === 'undefined') throw new Error("'target' parameter is undefined")
+    Constructor.initializeAll = function (target, options, ignoreNothingFound) {
+        if (typeof target === 'undefined') throw new Error("'target' parameter is undefined")
 
         var elements = []
-        if(target instanceof Element) {
+        if (target instanceof Element) {
             elements = [target]
-        } else if(typeof target.length !== 'undefined' && target.length > 0 && target[0] instanceof Element) {
+        } else if (typeof target.length !== 'undefined' && target.length > 0 && target[0] instanceof Element) {
             // check if JQuery object and fetch native DOM elements
             elements = typeof target.get === 'function' ? target.get() : target
-        } else if(typeof target === 'string') {
+        } else if (typeof target === 'string') {
             elements = document.querySelectorAll(target) || []
         }
 
@@ -300,12 +335,12 @@ window.Sticksy = (function () {
         var parents = []
         var stickyElements = []
         elements.forEach(function (el) {
-            if(parents.indexOf(el.parentNode) !== -1) return
+            if (parents.indexOf(el.parentNode) !== -1) return
             parents.push(el.parentNode)
             stickyElements.push(el)
         })
 
-        if(!ignoreNothingFound && !stickyElements.length) throw new Error('There are no elements to initialize')
+        if (!ignoreNothingFound && !stickyElements.length) throw new Error('There are no elements to initialize')
         return stickyElements.map(function (el) {
             return new Constructor(el, options)
         })
@@ -326,8 +361,8 @@ window.Sticksy = (function () {
         parseNumber: function (val) {
             return parseFloat(val) || 0
         },
-        findElement: function(el, root) {
-            if(!root) root = document
+        findElement: function (el, root) {
+            if (!root) root = document
             return ('string' === typeof el) ? root.querySelector(el) :
                 (el instanceof Element) ? el : undefined
         },
@@ -357,7 +392,7 @@ window.Sticksy = (function () {
 // Jquery Injection
 var jQueryPlugin = window.$ || window.jQuery || window.Zepto
 if (jQueryPlugin) {
-    jQueryPlugin.fn.sticksy = function sticksyPlugin (opts) {
+    jQueryPlugin.fn.sticksy = function sticksyPlugin(opts) {
         return Sticksy.initializeAll(this, opts)
     }
 }

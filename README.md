@@ -7,12 +7,12 @@
 [![snyk](https://snyk.io/test/npm/sticksy/badge.svg)](https://snyk.io/test/npm/sticksy)
 [![license](https://badgen.net/npm/license/lodash)](https://opensource.org/licenses/MIT)
 
-Sticksy is a **zero-dependency** JavaScript library for making cool things like **fixed widgets**. It's simple and ultra fast. ⚡\
+Sticksy.js is a **zero-dependency** JavaScript library for making cool things like **fixed widgets**. It's simple and ultra fast. ⚡\
 Unlike [**Q2W3 WordPress Plugin**](https://wordpress.org/plugins/q2w3-fixed-widget/), you don't need WordPress, jQuery, or other stuff. **You can use it in any web project.**  
 
 Just import and setup in one line:
 ```javascript
-var styleEl = new Sticksy('.widget.is-sticky') // and that's all!
+var stickyEl = new Sticksy('.widget.is-sticky') // and that's all!
 ```
 
 
@@ -36,12 +36,14 @@ Sticky blocks are perceived much better by your visitors than unfixed widgets an
    * Super performance
    * Zero dependencies
    * Reacts to DOM changes 
-   * Small size ~1.6Kb (minified gzip)
+   * Small size ~1.7Kb (minified gzip)
    
 ## Examples
   - [Basic usage](https://codepen.io/kovart/pen/VReGjN)
   - [Usage with JQuery or Zepto](https://codepen.io/kovart/pen/OqMrvR)
   - [Same selector for multiple items](https://codepen.io/kovart/pen/eXJxQY)
+ 
+ More examples in [`this folder`](./examples).
  
 ## Installation
 You can simply install the library from CDN, NPM, Yarn or just download it from this repo.
@@ -87,12 +89,17 @@ Watch an example.
 Then you should initialize an instance with a **new** keyword (it's important):
 ```js
 var stickyElement = new Sticksy('.widget.is-sticky');
+// just for demonstration of state handling
+stickyEl.onStateChanged = function (state) {
+    if(state === 'fixed') stickyEl.nodeRef.classList.add('widget--sticky')
+    else stickyEl.nodeRef.classList.remove('widget--sticky')
+}
 ```
 That's all 😎
 
 ------
 
-#### Same selector for multiple containers 
+#### Initialize all sticky elements 
 It is helpful if you have, for example, two sidebars with the same CSS classes.
 ```html
 <aside class="sidebar"> 
@@ -114,6 +121,17 @@ It is helpful if you have, for example, two sidebars with the same CSS classes.
 var stickyElements = Sticksy.initializeAll('.is-sticky')
 ```
 
+#### Dynamically changing elements
+The library can detect changes of the container and its children.
+It uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver" target="_blank">MutationObserver</a> for this.
+If you want the library to react on DOM changes, you need to specify `listen` option.
+```js
+var stickyEl = new Sticksy('.block.is-sticky', {
+    listen: true, // Listen for the DOM changes in the container
+});
+```
+⚠️ **Beware! Since the library uses style attribute to change elements position,
+it ignores any changes in style attributes of sticky elements.**
 ------
 
 #### Via JQuery/Zepto:
@@ -132,6 +150,15 @@ The API is as simple as possible.
 ```js
 var instance = new Sticksy(target[, options]);
 ```
+
+- `target` _(String | Element)_ target element or query string
+- `options` _(ContructorOptions)_ all options below are optional
+	- `topSpacing`: _(Number)_  additional top spacing for the top sticky element when it becomes fixed (sticky). Use this option when you have a fixed top panel.  `Optional` | `Default: 0`
+	- `listen`: _(Boolean)_ should we recalculate all cached dimensions of the viewport, container and sticky elements on any DOM changes in the container element. `Optional` | `Default: false` 
+	
+    
+- ***Returns:*** [`Instance`](#instance-object)
+
 Example:
 ```js
 var stickyEl = new Sticksy('.block.is-sticky', {
@@ -140,32 +167,31 @@ var stickyEl = new Sticksy('.block.is-sticky', {
 });
 ```
 
-#### target: string | Element
-Specify a target sticky element. You can pass here a string query or the target element. <br> 
-`Required`
-
-#### options: ContructorOptions
-Sticksy comes with options to configure how it works. All options below are optional. \
-`Optional`
-
-##### topSpacing: number
-Additional top spacing for the top sticky element when it becomes fixed (sticky). Use this option when you have a fixed top panel. \
-`Optional` `Default: 0`
-
-##### listen: boolean
-Should we recalculate all cached dimensions of the viewport, container and sticky elements on any DOM **changes in the container element**. 
-
-`Optional` `Default: false` 
 
 > Unfortunately, we cannot react to changes in the style attribute of sticky elements. 
 >The library uses the style attribute to make elements sticky and 
 >if we react all the time the attribute changes it will cause a performance leak.
 
 
-### Instance methods
+### Instance object
+
+### Properties
+
+- `nodeRef` _(Element)_ a direct reference to the DOM element
+```js
+stickyEl.onStateChanged = function(state) {
+    if(state === 'fixed') stickyEl.nodeRef.classList.add('widget--fixed');
+    else stickyEl.nodeRef.classList.remove('widget--fixed');
+}
+```
+
+### Methods
+
 #### refresh(): void
+
 Recalculate elements state and update position of sticky elements according to the new state. \
 Call it in case the library must refresh its state but for some reason this did not happen.
+
 ```js
 stickyEl.refresh();
 ```
@@ -173,6 +199,20 @@ stickyEl.refresh();
 The same as `refresh()`, but recalculates **all cached dimensions** of the viewport, container and sticky elements.
 ```js
 stickyEl.hardRefresh();
+```
+
+#### disable(): void
+Disable 'sticky' effect.
+
+```js
+stickyEl.disable();
+```
+
+#### enable(): void
+Enable 'sticky' effect
+
+```js
+stickyEl.enable();
 ```
 
 ### Events
@@ -183,7 +223,7 @@ The state can be: `static`, `fixed` and `stuck`.
 ```js
 stickyEl.onStateChanged = function(state){
   // your handler here
-  if (state === 'fixed') alert('it's fixed!')
+  if (state === 'fixed') alert('it is fixed!')
 }
 ```
 ---
@@ -200,26 +240,28 @@ Call `hardRefresh()` method for the all instances.
 Sticksy.hardRefreshAll();
 ```
 
+#### disableAll(): void
+Call `disable()` method for the all instances.
+```js
+Sticksy.disableAll();
+```
+
 ### Helper methods
 #### initializeAll(target[, options][, ignoreNothingFound])
+
 Find and initialize all instances with the same options.
+
+- `target` _(String | Element | Element[] | jQuery)_ target element or query string. `Required`
+- `options` _[(ContructorOptions)](#constructor-options)_ options for the target elements. `Optional`
+- `ignoreNothingFound` _(Boolean)_ should the method throw an error if no elements found. `Default: false`
+
+
+- ***Returns*:** [`Instance`](#instance-object) 
 
 Example:
 ```js
 var stickyElems = Sticksy.initializeAll('.is-sticky', { listen: true }, true)
 ```
-
-##### target: string | Element | Element[] | jQuery
-Target element(s). \
-`Required`
-
-##### options: ContructorOptions
-Options for the target elements. See [`Contructor options`](#constructor-options). \
-`Optional`
-
-##### ignoreNothingFound: boolean
-Should the method throw an error if no elements found. \
-`Optional` `Default: false`
 
 ## Performance
 Performance is ultra high. ⚡
@@ -235,14 +277,15 @@ Constructor.prototype._calcState = function (windowOffset) {
     return STATES.Fixed
 }
 ```
-The function doesn't have any сomplicated calculations. It just compares two variables. Not more. \
+The function doesn't have any complicated calculations. It just compares two variables. Not more. \
 If the calculated state is **the same** as previous the library **does nothing**.
 
-Cool, right? 🙂
+Cool, right? 😃
   
-## Browser Compability
-Sticksy works in all modern browsers including Internet Explorer 11.\
-If you need to support IE10 or below you should install [`Mutation Observer Polyfill`](https://github.com/megawac/MutationObserver.js).
+## Browser Compatibility
+Sticksy.js works in all modern browsers including Internet Explorer 11.\
+If you want the library to react on DOM changes and need to support IE10 or below, 
+you should install [`Mutation Observer Polyfill`](https://github.com/megawac/MutationObserver.js).
 
 Please, open an issue if you have any browser compatibility problems.
 

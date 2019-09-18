@@ -3,57 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sticksy.js - JQuery usage</title>
-    <style>
-        *, *::after { box-sizing: border-box; }
-
-        body {
-            font-family: "Open Sans", Helvetica, sans-serif;
-            color:#7b7b7b;
-            margin: 10px 20px;
-            font-size: 18px;
-            min-height: 250vh;
-        }
-
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .wrapper { display: flex; }
-
-        header, footer {
-            font-size: 2em;
-            background-color:#e5e5e5;
-            padding: 15px;
-            text-align:center;
-        }
-
-        main {
-            flex: 1;
-            padding:0 20px;
-            line-height: 1.5em;
-        }
-
-        aside {
-            width:30%;
-            min-width: 150px;
-            max-width: 300px;
-        }
-
-        aside .widget {
-            padding:15px;
-            margin:7px 0;
-            text-align:center;
-            background-color:#e5e5e5;
-        }
-
-        @media (max-width: 1000px){
-            body { font-size: 16px; }
-            aside {
-                max-width: 200px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
 <div class="container">
@@ -81,11 +31,11 @@
             </p>
         </main>
         <aside class="sidebar">
-            <div class="widget is-sticky">
+            <div class="widget">
                 <h2>Ad</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur.</p>
             </div>
-            <div class="widget">
+            <div class="widget is-sticky">
                 <h2>Article</h2>
                 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
             </div>
@@ -96,13 +46,13 @@
         </aside>
     </div>
     <footer>Footer</footer>
+    <div class="filler">REALLY BIG BLOCK</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="../src/sticksy.js"></script>
 <script>
-    // $('.widget.is-sticky').sticksy()
-    new Sticksy(document.querySelector('.is-sticky'))
+    $('.widget.is-sticky').sticksy()
 </script>
 </body>
 </html>
