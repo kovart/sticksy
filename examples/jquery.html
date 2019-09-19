@@ -35,7 +35,7 @@
                 <h2>Ad</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur.</p>
             </div>
-            <div class="widget is-sticky">
+            <div class="widget js-sticky-widget">
                 <h2>Article</h2>
                 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
             </div>
@@ -52,7 +52,11 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="../src/sticksy.js"></script>
 <script>
-    $('.widget.is-sticky').sticksy()
+    var stickyEl = $('.widget.js-sticky-widget').sticksy()[0]
+    stickyEl.onStateChanged = function (state) {
+        if(state === 'fixed') stickyEl.nodeRef.classList.add('widget--sticky')
+        else stickyEl.nodeRef.classList.remove('widget--sticky')
+    }
 </script>
 </body>
 </html>

@@ -35,7 +35,7 @@
                 <h2>Article</h2>
                 <p>Lorem ipsum dolor sit amet, dolor sit.</p>
             </div>
-            <div class="widget is-sticky">
+            <div class="widget js-sticky-widget">
                 <h2>Ad</h2>
                 <p>GET YOUR 100% FREE TRIAL</p>
             </div>
@@ -50,7 +50,7 @@
 </div>
 <script src="../src/sticksy.js"></script>
 <script>
-    var stickyEl = new Sticksy('.widget.is-sticky')
+    var stickyEl = new Sticksy('.widget.js-sticky-widget')
     stickyEl.onStateChanged = function (state) {
         if(state === 'fixed') stickyEl.nodeRef.classList.add('widget--sticky')
         else stickyEl.nodeRef.classList.remove('widget--sticky')

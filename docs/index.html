@@ -78,7 +78,7 @@
 </div>
 <main class="container">
     <h2 id="example">Example</h2>
-    <pre><code class="js">var stickyEl = new Sticksy('.widget.is-sticky') // and that's all!</code></pre>
+    <pre><code class="js">var stickyEl = new Sticksy('.js-sticky-widget') // and that's all!</code></pre>
     <div class="demo">
         <div class="demo__title">Try in action</div>
         <iframe class="demo__frame" src="frames/basic.html" frameborder="0"></iframe>
@@ -117,8 +117,7 @@
     &lt;!-- Non sticky element --&gt;
     &lt;div class=&quot;widget&quot;&gt;&lt;/div&gt;
     &lt;!-- Sticky element --&gt;
-    &lt;div class=&quot;widget is-sticky&quot;&gt;&lt;/div&gt;
-    &lt;!-- Now, the next elements are sticky also --&gt;
+    &lt;div class=&quot;widget js-sticky-widget&quot;&gt;&lt;/div&gt;
     &lt;div class=&quot;widget&quot;&gt;&lt;/div&gt;
     &lt;div class=&quot;widget&quot;&gt;&lt;/div&gt;
 &lt;/aside&gt;</code></pre>
@@ -131,7 +130,7 @@
     <p>
         Then you should initialize an instance with a <b>new keyword</b> (it's important):
     </p>
-    <pre><code class="js">var stickyElement = new Sticksy('.widget.is-sticky');
+    <pre><code class="js">var stickyElement = new Sticksy('.js-sticky-widget');
 // you can handle state changing
 stickyEl.onStateChanged = function (state) {
     if(state === 'fixed') {
@@ -150,7 +149,7 @@ stickyEl.onStateChanged = function (state) {
         <mark class="code">topSpacing</mark>
         option.
     </p>
-    <pre><code class="js">var stickyEl = new Sticksy('.widget.is-sticky', {topSpacing: 70})</code></pre>
+    <pre><code class="js">var stickyEl = new Sticksy('.js-sticky-widget', {topSpacing: 70})</code></pre>
     <div class="demo">
         <div class="demo__title">Fixed panel example</div>
         <iframe class="demo__frame" src="frames/fixed-panel.html" frameborder="0"></iframe>
@@ -166,17 +165,17 @@ stickyEl.onStateChanged = function (state) {
     <pre><code class="html">&lt;aside class=&quot;sidebar&quot;&gt;
     &lt;div class=&quot;widget&quot;&gt;&lt;/div&gt;
     &lt;!-- Sticky element --&gt;
-    &lt;div class=&quot;widget is-sticky&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;widget js-sticky-widget&quot;&gt;&lt;/div&gt;
 &lt;/aside&gt;
 &lt;main&gt;
     &lt;!-- Some content here --&gt;
 &lt;/main&gt;
 &lt;aside class=&quot;sidebar&quot;&gt;
     &lt;!-- Sticky element --&gt;
-    &lt;div class=&quot;widget is-sticky&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;widget js-sticky-widget&quot;&gt;&lt;/div&gt;
     &lt;div class=&quot;widget &quot;&gt;&lt;/div&gt;
 &lt;/aside&gt;</code></pre>
-    <pre><code class="js">var stickyElements = Sticksy.initializeAll('.is-sticky')</code></pre>
+    <pre><code class="js">var stickyElements = Sticksy.initializeAll('.js-sticky-widget')</code></pre>
     <div class="demo">
         <div class="demo__title">Multiple items demo</div>
         <iframe class="demo__frame" src="frames/multiple-items.html" frameborder="0"></iframe>
@@ -192,7 +191,7 @@ stickyEl.onStateChanged = function (state) {
         <mark class="code">listen</mark>
         option.
     </p>
-    <pre><code class="js">var stickyEl = new Sticksy('.block.is-sticky', {
+    <pre><code class="js">var stickyEl = new Sticksy('.js-sticky-widget', {
     listen: true, // Listen for the DOM changes in the container
 });</code></pre>
     <p>
@@ -205,7 +204,7 @@ stickyEl.onStateChanged = function (state) {
     </p>
     <h3 id="jquery">Usage with JQuery/Zepto</h3>
     <p>The library is automatically injected into jQuery, so you can use them together.</p>
-    <pre><code class="js">var stickyElement = $('.widget.is-sticky').sticksy();</code></pre>
+    <pre><code class="js">var stickyElement = $('.widget.js-sticky-widget').sticksy();</code></pre>
     <hr/>
     <h2 id="api">API</h2>
     <p>See the full API in the <a href="https://github.com/kovart/sticksy/#api" target="_blank">github repo</a>.</p>

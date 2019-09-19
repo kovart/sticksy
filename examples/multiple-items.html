@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sticksy.js - Multiple items</title>
     <style>
@@ -57,7 +56,7 @@
             border: 2px dotted #afafaf;
         }
 
-        .block.is-sticky {
+        .block.js-sticky-widget {
             background: #f0f0f0;
         }
 
@@ -76,35 +75,35 @@
 <div class="wrapper">
     <div id="container1" class="container">
         <div class="block"></div>
-        <div class="block is-sticky">😎</div>
+        <div class="block js-sticky-widget">😎</div>
         <div class="block"></div>
     </div>
     <div id="container2" class="container">
         <div class="block is-big"></div>
         <div class="block is-small"></div>
-        <div class="block is-sticky">😎</div>
+        <div class="block js-sticky-widget">😎</div>
     </div>
     <div id="container3" class="container ">
-        <div class="block is-sticky">😎</div>
+        <div class="block js-sticky-widget">😎</div>
         <div class="block"></div>
         <div class="block"></div>
     </div>
     <div id="container4" class="container">
         <div class="block"></div>
-        <div class="block is-sticky is-big">😎</div>
+        <div class="block is-big js-sticky-widget">😎</div>
         <div class="block"></div>
     </div>
 </div>
 <div class="filler">REALLY BIG BLOCK</div>
 <script src="../src/sticksy.js"></script>
 <script>
-    Sticksy.initializeAll('.is-sticky', {listen: true})
+    Sticksy.initializeAll('.js-sticky-widget', {listen: true})
 
     // ... the same as
-    // new Sticksy('#container1 .block.is-sticky')
-    // new Sticksy('#container2 .block.is-sticky')
-    // new Sticksy('#container3 .block.is-sticky')
-    // new Sticksy('#container4 .block.is-sticky')
+    // new Sticksy('#container1 .block.js-sticky-widget')
+    // new Sticksy('#container2 .block.js-sticky-widget')
+    // new Sticksy('#container3 .block.js-sticky-widget')
+    // new Sticksy('#container4 .block.js-sticky-widget')
 </script>
 </body>
 </html>
