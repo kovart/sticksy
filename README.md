@@ -10,7 +10,7 @@
 Sticksy.js is a **zero-dependency** JavaScript library for making cool things like **fixed widgets**. It's simple and ultra fast. ⚡\
 Unlike [**Q2W3 WordPress Plugin**](https://wordpress.org/plugins/q2w3-fixed-widget/), you don't need WordPress, jQuery, or other stuff. **You can use it in any web project.**  
 
-Just import and setup in one line:
+Just import and initialize:
 ```javascript
 var stickyEl = new Sticksy('.widget.is-sticky') // and that's all!
 ```
