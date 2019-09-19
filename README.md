@@ -10,9 +10,9 @@
 Sticksy.js is a **zero-dependency** JavaScript library for making cool things like **fixed widgets**. It's simple and ultra fast. ⚡\
 Unlike [**Q2W3 WordPress Plugin**](https://wordpress.org/plugins/q2w3-fixed-widget/), you don't need WordPress, jQuery, or other stuff. **You can use it in any web project.**  
 
-Just import and setup in one line:
+Just import and initialize:
 ```javascript
-var stickyEl = new Sticksy('.widget.is-sticky') // and that's all!
+var stickyEl = new Sticksy('.js-sticky-widget') // and that's all!
 ```
 
 
@@ -24,7 +24,7 @@ var stickyEl = new Sticksy('.widget.is-sticky') // and that's all!
 </p>
 
 ## When do you need Sticksy? 
-> **The basic use-case of the library is to make fixed widgets in sidebar.**
+> **The basic use-case of the library is to make fixed widgets in a sidebar.**
 
 The library is especially useful for ads or other items that visitors want to interact with.
 Sticky blocks are perceived much better by your visitors than unfixed widgets and therefore they have a significantly higher click-through rate. 
@@ -78,8 +78,7 @@ Watch an example.
     <!-- Non sticky element -->
     <div class="widget"></div>
     <!-- Sticky element -->
-    <div class="widget is-sticky"></div> 
-    <!-- Now, the next elements are sticky also -->
+    <div class="widget js-sticky-widget"></div> 
     <div class="widget"></div> 
     <div class="widget"></div> 
 </aside>
@@ -88,11 +87,11 @@ Watch an example.
 
 Then you should initialize an instance with a **new** keyword (it's important):
 ```js
-var stickyElement = new Sticksy('.widget.is-sticky');
+var stickyElement = new Sticksy('.js-sticky-widget');
 // just for demonstration of state handling
 stickyEl.onStateChanged = function (state) {
-    if(state === 'fixed') stickyEl.nodeRef.classList.add('widget--sticky')
-    else stickyEl.nodeRef.classList.remove('widget--sticky')
+    if(state === 'fixed') stickyEl.nodeRef.classList.add('widget--fixed')
+    else stickyEl.nodeRef.classList.remove('widget--fixed')
 }
 ```
 That's all 😎
@@ -105,20 +104,20 @@ It is helpful if you have, for example, two sidebars with the same CSS classes.
 <aside class="sidebar"> 
     <div class="widget"></div>
     <!-- Sticky element -->
-    <div class="widget is-sticky"></div> 
+    <div class="widget js-sticky-widget"></div> 
 </aside>
 <main> 
-	<!-- Some content here --> 
+    <!-- Some content here --> 
 </main>
 <aside class="sidebar"> 
     <!-- Sticky element -->
-    <div class="widget is-sticky"></div>
-    <div class="widget "></div> 
+    <div class="widget js-sticky-widget"></div>
+    <div class="widget"></div> 
 </aside>
 ```
 
 ```js
-var stickyElements = Sticksy.initializeAll('.is-sticky')
+var stickyElements = Sticksy.initializeAll('.js-sticky-widget')
 ```
 
 #### Dynamically changing elements
@@ -126,7 +125,7 @@ The library can detect changes of the container and its children.
 It uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver" target="_blank">MutationObserver</a> for this.
 If you want the library to react on DOM changes, you need to specify `listen` option.
 ```js
-var stickyEl = new Sticksy('.block.is-sticky', {
+var stickyEl = new Sticksy('.js-sticky-widget', {
     listen: true, // Listen for the DOM changes in the container
 });
 ```
@@ -136,7 +135,7 @@ var stickyEl = new Sticksy('.block.is-sticky', {
 
 #### Via JQuery/Zepto:
 ```js
-var stickyElement = $('.widget.is-sticky').sticksy();
+var stickyEl = $('.widget.js-sticky-widget').sticksy();
 ```
 
 ------
@@ -161,7 +160,7 @@ var instance = new Sticksy(target[, options]);
 
 Example:
 ```js
-var stickyEl = new Sticksy('.block.is-sticky', {
+var stickyEl = new Sticksy('.block.js-sticky-widget', {
     topSpacing: 60, // Specify this when you have a fixed top panel
     listen: true, // Listen for the DOM changes in the container
 });
@@ -260,7 +259,7 @@ Find and initialize all instances with the same options.
 
 Example:
 ```js
-var stickyElems = Sticksy.initializeAll('.is-sticky', { listen: true }, true)
+var stickyElems = Sticksy.initializeAll('.js-sticky-widget', { listen: true }, true)
 ```
 
 ## Performance
