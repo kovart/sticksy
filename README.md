@@ -36,7 +36,7 @@ Sticky blocks are perceived much better by your visitors than unfixed widgets an
    * Super performance
    * Zero dependencies
    * Reacts to DOM changes 
-   * Small size ~1.7Kb (minified gzip)
+   * Small size ~1.8Kb (minified gzip)
    
 ## Examples
   - [Basic usage](https://codepen.io/kovart/pen/VReGjN)
@@ -87,7 +87,7 @@ Watch an example.
 
 Then you should initialize an instance with a **new** keyword (it's important):
 ```js
-var stickyElement = new Sticksy('.js-sticky-widget');
+var stickyElement = new Sticksy('.js-sticky-widget')
 // just for demonstration of state handling
 stickyEl.onStateChanged = function (state) {
     if(state === 'fixed') stickyEl.nodeRef.classList.add('widget--fixed')
@@ -96,6 +96,10 @@ stickyEl.onStateChanged = function (state) {
 ```
 That's all 😎
 
+Also, you can directly pass the target node:
+```js
+var stickyElement = new Sticksy(document.getElementById('sticky-widget'))
+```
 ------
 
 #### Initialize all sticky elements 
@@ -127,15 +131,16 @@ If you want the library to react on DOM changes, you need to specify `listen` op
 ```js
 var stickyEl = new Sticksy('.js-sticky-widget', {
     listen: true, // Listen for the DOM changes in the container
-});
+})
 ```
 > Beware! Since the library uses style attribute to change elements position,
-> it ignores any changes in style attributes of sticky elements.
+> it ignores changes of width and height properties of style attribute. 
+> Use CSS classes instead.
 ------
 
 #### Via JQuery/Zepto:
 ```js
-var stickyEl = $('.widget.js-sticky-widget').sticksy();
+var stickyEl = $('.widget.js-sticky-widget').sticksy({topSpacing: 60, listen: true})
 ```
 
 ------
@@ -165,12 +170,6 @@ var stickyEl = new Sticksy('.block.js-sticky-widget', {
     listen: true, // Listen for the DOM changes in the container
 });
 ```
-
-
-> Unfortunately, we cannot react to changes in the style attribute of sticky elements. 
->The library uses the style attribute to make elements sticky and 
->if we react all the time the attribute changes it will cause a performance leak.
-
 
 ### Instance object
 
