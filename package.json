@@ -1,6 +1,6 @@
 {
   "name": "sticksy",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Sticksy is a library for making cool things like fixed widgets 😎",
   "main": "index.js",
   "scripts": {

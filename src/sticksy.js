@@ -3,7 +3,7 @@
  * A library for making cool things like fixed widgets.
  * Dependency-free. ES5 code.
  * -
- * @version 0.1.1
+ * @version 0.1.2
  * @url https://github.com/kovart/sticksy
  * @author Artem Kovalchuk <kovart.dev@gmail.com>
  * @license The MIT License (MIT)
@@ -95,34 +95,40 @@ window.Sticksy = (function () {
             bottom: 0
         }
 
+        // MutationObserver state
+        this._isListening = false
+
         // The library uses 'position: absolute' to stuck sticky nodes to the bottom of the container
         this._props.containerEl.style.position = 'relative'
         // Flexbox doesn't collapse margin of items
         this._shouldCollapseMargins = getComputedStyle(this._props.containerEl).display.indexOf('flex') === -1
 
-        this.hardRefresh()
-
         // Listen for DOM changes in the container
         if (this._props.listen) {
-            var mutationObserver = new MutationObserver(function (mutations) {
-                // Dirty check if something has changed
-                // Used to avoid hardRefresh() when we change style attribute in sticky nodes
-                mutations.forEach(function (mutation) {
-                    if ((that._dummyNodes.indexOf(mutation.target) !== -1 && mutation.attributeName === 'style') ||
-                        (that._stickyNodes.indexOf(mutation.target) !== -1 && mutation.attributeName === 'style')) {
-                        return
-                    }
-                    that.hardRefresh()
-                })
-            });
+            this._mutationObserver = new MutationObserver(function (mutations) {
+                that.hardRefresh()
+            })
 
-            mutationObserver.observe(this._props.containerEl, {
-                attributes: true,
-                characterData: true,
-                childList: true,
-                subtree: true,
-            });
+            this._startListen()
         }
+        this.hardRefresh()
+    }
+
+    Constructor.prototype._startListen = function(){
+        if(!this._props.listen || this._isListening) return
+        this._mutationObserver.observe(this._props.containerEl, {
+            attributes: true,
+            characterData: true,
+            childList: true,
+            subtree: true,
+        })
+        this._isListening = true
+    }
+
+    Constructor.prototype._stopListen = function(){
+        if(!this._props.listen || !this._isListening) return
+        this._mutationObserver.disconnect()
+        this._isListening = false
     }
 
     Constructor.prototype._calcState = function (windowOffset) {
@@ -152,15 +158,7 @@ window.Sticksy = (function () {
         }
     }
 
-    /**
-     * Recalculate the position
-     * @public
-     */
-    Constructor.prototype.refresh = function () {
-        var state = this._calcState(window.pageYOffset, this._limits)
-
-        if (state === this.state) return
-
+    Constructor.prototype._applyState = function(state){
         // We enable dummy nodes at the end
         // to avoid 'scrolling down effect' in Chrome
         if (state === STATES.Static) {
@@ -175,8 +173,20 @@ window.Sticksy = (function () {
             }
             this._enableElements(this._dummyNodes)
         }
+    }
 
+    /**
+     * Recalculate the position
+     * @public
+     */
+    Constructor.prototype.refresh = function () {
+        var state = this._calcState(window.pageYOffset, this._limits)
+        if (state === this.state) return
+
+        this._stopListen()
+        this._applyState(state)
         this.state = state
+        this._startListen()
 
         if (typeof this.onStateChanged === 'function') {
             this.onStateChanged(state)
@@ -188,13 +198,21 @@ window.Sticksy = (function () {
      * @public
      */
     Constructor.prototype.hardRefresh = function () {
+        this._stopListen()
+        var oldState = this.state
+        // reset state for recalculation
         this.state = STATES.Static
-        this._disableElements(this._dummyNodes)
-        this._resetElements(this._stickyNodes)
+        this._applyState(this.state)
         this._fixElementsSize(this._stickyNodes)
         this._updateStickyNodesHeight()
         this._updateLimits()
-        this.refresh()
+        this.state = this._calcState(window.pageYOffset, this._limits)
+        this._applyState(this.state)
+        this._startListen()
+
+        if (typeof this.onStateChanged === 'function' && oldState !== this.state) {
+            this.onStateChanged(this.state)
+        }
     }
 
     /**
@@ -203,8 +221,7 @@ window.Sticksy = (function () {
      */
     Constructor.prototype.disable = function(){
         this.state = STATES.Static
-        this._disableElements(this._dummyNodes)
-        this._resetElements(this._stickyNodes)
+        this._applyState(this.state)
         instances.splice(instances.indexOf(this), 1)
     }
 
