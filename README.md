@@ -87,7 +87,7 @@ Watch an example.
 
 Then you should initialize an instance with a **new** keyword (it's important):
 ```js
-var stickyElement = new Sticksy('.js-sticky-widget')
+var stickyEl = new Sticksy('.js-sticky-widget')
 // just for demonstration of state handling
 stickyEl.onStateChanged = function (state) {
     if(state === 'fixed') stickyEl.nodeRef.classList.add('widget--fixed')
@@ -98,7 +98,7 @@ That's all 😎
 
 Also, you can directly pass the target node:
 ```js
-var stickyElement = new Sticksy(document.getElementById('sticky-widget'))
+var stickyEl = new Sticksy(document.getElementById('sticky-widget'))
 ```
 ------
 
