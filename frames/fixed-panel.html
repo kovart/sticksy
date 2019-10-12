@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="us">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sticksy.js - Basic example</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header header--sticky">
+        <div class="container">Move down ↓</div>
+    </header>
+    <div class="container">
+        <div class="content">
+            <main>
+                <article>
+                    <div class="title"></div>
+                    <div style="width: 55%" class="title"></div>
+                    <br>
+                    <br>
+                    <div class="image">
+                        <div class="mountain"></div>
+                        <div class="mountain"></div>
+                        <div class="sun"></div>
+                    </div>
+                    <div class="text"></div>
+                    <div class="text"></div>
+                    <div class="text"></div>
+                    <div class="text"></div>
+                    <div class="text"></div>
+                    <div class="text"></div>
+                    <div class="image">
+                        <div class="mountain"></div>
+                        <div class="mountain"></div>
+                        <div class="sun"></div>
+                    </div>
+                    <div class="text"></div>
+                    <div class="text"></div>
+                    <div class="text"></div>
+                    <div class="text"></div>
+                    <div class="image">
+                        <div class="mountain"></div>
+                        <div class="mountain"></div>
+                        <div class="sun"></div>
+                    </div>
+                    <div class="text"></div>
+                    <div class="text"></div>
+                </article>
+            </main>
+            <aside>
+                <div class="widget"></div>
+                <div class="widget js-sticky-widget">
+                    STICKY
+                </div>
+                <div class="widget"></div>
+            </aside>
+        </div>
+        <footer></footer>
+        <div class="filler">VERY BIG BLOCK</div>
+    </div>
+    <script src="../sticksy.js"></script>
+    <script>
+        var stickyEl = new Sticksy('.js-sticky-widget', {topSpacing: 60})
+        stickyEl.onStateChanged = function (state) {
+            if (state === 'fixed') stickyEl.nodeRef.classList.add('widget--sticky')
+            else stickyEl.nodeRef.classList.remove('widget--sticky')
+        }
+    </script>
+</body>
+</html>

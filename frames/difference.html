@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&display=swap" rel="stylesheet">
+    <title>Difference from 'position: sticky'</title>
+</head>
+<style>
+    body {
+        font-family: Inconsolata, Helvetica, sans-serif;
+    }
+
+    h1, h2, h3 {
+        text-align: center
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        margin: 20px;
+        height: 800px;
+    }
+
+    .block {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 1.25rem;
+        height: 150px;
+        color: #a6a6a6;
+        width: 150px;
+        margin: 15px;
+        border: 2px dotted #b9b9b9;
+        background: rgba(214, 225, 234, 0.06);
+    }
+    .block--sticky {
+        position: sticky;
+        top: 15px;
+        color: #1e1e1e;
+        background: rgba(214, 225, 234, 0.06);
+        border: 2px dotted #4f74db;
+    }
+    .block--sticksyJs {
+        color: #1e1e1e;
+        background: rgba(255, 192, 203, 0.06);
+        border: 2px dotted rgb(255, 132, 153);
+    }
+</style>
+<body>
+<h1>Move down ↓</h1>
+<hr>
+<div class="container">
+    <aside>
+        <div class="block block--sticky">position: sticky</div>
+        <div class="block">Just block</div>
+    </aside>
+    <aside>
+        <div class="block block--sticksyJs">Sticksy.js</div>
+        <div class="block">Just block</div>
+    </aside>
+</div>
+<hr>
+<h2>The End</h2>
+<script src="../sticksy.js"></script>
+<script>
+    var stickyEl = new Sticksy('.block--sticksyJs')
+</script>
+</body>
+</html>

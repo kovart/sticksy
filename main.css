@@ -1,0 +1,153 @@
+:root {
+    --black: #222222;
+    --blue: #0074d9;
+    --sticksy: #ea5063;
+    --demo: #545458;
+    --link: var(--blue);
+}
+
+html {
+    font: 18px/1.5 Inconsolata, "Helvetica", sans-serif;
+    color: var(--black);
+}
+
+@media (min-width: 456px) {
+    body {
+        margin-top: 2.5rem
+    }
+}
+
+@media (min-width: 700px) {
+    html {
+        font-size: 20px
+    }
+
+    body {
+        margin-top: 5rem
+    }
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Montserrat, sans-serif;
+    margin: 0 0 0.5rem -0.1rem;
+    line-height: 1;
+    color: #111;
+    text-rendering: optimizeLegibility;
+}
+
+h1 {
+    font-size: 3rem;
+    font-family: "Montserrat", sans-serif;
+    color: var(--sticksy);
+    margin-bottom: 3rem;
+}
+
+h1 a {
+    color: inherit;
+}
+
+h2 {
+    margin-top: 2.5rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: 1.3rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--link);
+}
+
+a:hover, a:focus {
+    text-decoration: underline;
+}
+
+.button {
+    --color: var(--black);
+    display: inline-block;
+    cursor: pointer;
+    padding: 0.65rem 1rem;
+    size: 1rem;
+    color: var(--color);
+    border: 1px solid var(--color);
+    background: white;
+}
+
+.button:hover, .button:focus {
+    background: var(--color);
+    color: white;
+    text-decoration: none;
+}
+
+.button:active {
+    transform: scale(0.94);
+}
+
+.button.button--red {
+    --color: var(--sticksy);
+}
+
+.button.button--blue {
+    --color: var(--blue);
+}
+
+hr {
+    border: none;
+    margin: 1.5rem 0;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    top: -1px;
+}
+
+pre, code {
+    padding: .5rem 1rem;
+    font-size: 0.8rem;
+    background: #f6f6f6;
+}
+
+code {
+    font-family: "Inconsolata", monospace;
+    background: #f6f6f6 !important;
+}
+
+.container {
+    max-width: 30rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+mark.code {
+    word-break: break-all;
+    display: inline-block;
+    padding: 3px 5px;
+    background: #F0F0F0;
+}
+
+
+.block {
+    padding: 25px;
+    border: 1px solid #1e1e1e;
+}
+
+.demo {
+    width: 100%;
+    border: 1px solid var(--demo);
+}
+
+.demo__title {
+    padding: 10px 20px;
+    background: var(--demo);
+    color: white;
+}
+
+.demo__frame {
+    width: 100%;
+    min-height: 20rem;
+    max-height: 85vh;
+}
