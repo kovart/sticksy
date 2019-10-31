@@ -2,8 +2,7 @@
 
 [![npm](https://badge.fury.io/js/sticksy.svg)](https://www.npmjs.com/package/sticksy)
 [![gzip size](https://badgen.net/badgesize/gzip/https://unpkg.com/sticksy@latest/dist/sticksy.min.js)](https://cdn.jsdelivr.net/npm/sticksy/dist/sticksy.min.js)
-[![issues](https://badgen.net/github/open-issues/kovart/sticksy)](https://github.com/kovart/sticksy/issues)
-[![downloads](https://badgen.net/npm/dm/sticksy)](https://www.npmjs.com/package/sticksy)
+[![hits](https://data.jsdelivr.com/v1/package/npm/sticksy/badge)](https://cdn.jsdelivr.net/npm/sticksy/dist/sticksy.min.js)
 [![snyk](https://snyk.io/test/npm/sticksy/badge.svg)](https://snyk.io/test/npm/sticksy)
 [![license](https://badgen.net/npm/license/lodash)](https://opensource.org/licenses/MIT)
 
