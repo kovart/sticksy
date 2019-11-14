@@ -30,14 +30,14 @@ Sticky blocks are perceived much better by your visitors than unfixed widgets an
 
 *But also you can use it for some design features.*
 
-## Why Sticksy is awesome?
+## Features
    * Setup in one line
    * Super performance
    * Zero dependencies
-   * Reacts to DOM changes 
+   * Can react to DOM changes 
    * Small size ~1.8Kb (minified gzip)
    
-## Examples
+## Demo
   - [Basic usage](https://codepen.io/kovart/pen/VReGjN)
   - [Usage with JQuery or Zepto](https://codepen.io/kovart/pen/OqMrvR)
   - [Same selector for multiple items](https://codepen.io/kovart/pen/eXJxQY)
@@ -144,7 +144,7 @@ var stickyEl = $('.widget.js-sticky-widget').sticksy({topSpacing: 60, listen: tr
 
 ------
 
-More examples in [`example folder`](https://github.com/kovart/sticksy/tree/master/examples) and [`this section`](#examples).
+More examples in [`example folder`](https://github.com/kovart/sticksy/tree/master/examples) and [`this section`](#demo).
 
 ## API
 The API is as simple as possible.
