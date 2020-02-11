@@ -15,7 +15,7 @@ var stickyEl = new Sticksy('.js-sticky-widget') // and that's all!
 ```
 
 
-> ⚠️ Sticksy **is not** a `position: sticky` polyfill. Sticksy **_affects_** on the sibling elements.
+> ⚠️ Sticksy **is not** a `position: sticky` polyfill. Sticksy **_moves_** the sibling elements.
 
 <br/>
 <p align="center">
@@ -99,10 +99,16 @@ Also, you can directly pass the target node:
 ```js
 var stickyEl = new Sticksy(document.getElementById('sticky-widget'))
 ```
+
+#### Via JQuery/Zepto:
+```js
+var stickyEl = $('.widget.js-sticky-widget').sticksy({topSpacing: 60, listen: true})
+```
+
 ------
 
 #### Initialize all sticky elements 
-It is helpful if you have, for example, two sidebars with the same CSS classes.
+You can add the one class to all the target elements and initialize them all in one line:
 ```html
 <aside class="sidebar"> 
     <div class="widget"></div>
@@ -123,10 +129,8 @@ It is helpful if you have, for example, two sidebars with the same CSS classes.
 var stickyElements = Sticksy.initializeAll('.js-sticky-widget')
 ```
 
-#### Dynamically changing elements
-The library can detect changes of the container and its children.
-It uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver" target="_blank">MutationObserver</a> for this.
-If you want the library to react on DOM changes, you need to specify `listen` option.
+#### Enable reaction to DOM changes
+The library can detect changes of the container and its children by using <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver" target="_blank">MutationObserver</a>. To enable this behavior, you have to specify `listen` option.
 ```js
 var stickyEl = new Sticksy('.js-sticky-widget', {
     listen: true, // Listen for the DOM changes in the container
@@ -135,12 +139,6 @@ var stickyEl = new Sticksy('.js-sticky-widget', {
 > Beware! Since the library uses style attribute to change elements position,
 > it ignores changes of width and height properties of style attribute. 
 > Use CSS classes instead.
-------
-
-#### Via JQuery/Zepto:
-```js
-var stickyEl = $('.widget.js-sticky-widget').sticksy({topSpacing: 60, listen: true})
-```
 
 ------
 
@@ -186,27 +184,27 @@ stickyEl.onStateChanged = function(state) {
 
 #### refresh(): void
 
-Recalculate elements state and update position of sticky elements according to the new state. \
-Call it in case the library must refresh its state but for some reason this did not happen.
+Recalculate and update the element according to the new state. 
 
 ```js
 stickyEl.refresh();
 ```
 #### hardRefresh(): void
-The same as `refresh()`, but recalculates **all cached dimensions** of the viewport, container and sticky elements.
+
+Recalculate all cached dimensions of the viewport, container and sticky elements and update the element according to the new state. Use it for manual refreshing, for example, if you haven't specified `listen` option, but you have to deal with some DOM manipulations.
 ```js
 stickyEl.hardRefresh();
 ```
 
 #### disable(): void
-Disable 'sticky' effect.
+Disable `'sticky'` effect.
 
 ```js
 stickyEl.disable();
 ```
 
 #### enable(): void
-Enable 'sticky' effect
+Enable `'sticky'` effect.
 
 ```js
 stickyEl.enable();
@@ -215,7 +213,7 @@ stickyEl.enable();
 ### Events
 
 #### onStateChanged
-Called when the state of element has changed. 
+Triggered when the state of the element has changed. 
 The state can be: `static`, `fixed` and `stuck`. 
 ```js
 stickyEl.onStateChanged = function(state){
@@ -227,18 +225,18 @@ stickyEl.onStateChanged = function(state){
 ### Static methods
 
 #### refreshAll(): void
-Call `refresh()` method for the all instances.
+Call `refresh()` method for all initialized instances.
 ```js
 Sticksy.refreshAll();
 ```
 #### hardRefreshAll(): void
-Call `hardRefresh()` method for the all instances.
+Call `hardRefresh()` method for all initialized instances.
 ```js
 Sticksy.hardRefreshAll();
 ```
 
 #### disableAll(): void
-Call `disable()` method for the all instances.
+Call `disable()` method for all initialized instances.
 ```js
 Sticksy.disableAll();
 ```
@@ -246,11 +244,11 @@ Sticksy.disableAll();
 ### Helper methods
 #### initializeAll(target[, options][, ignoreNothingFound])
 
-Find and initialize all instances with the same options.
+Find and initialize all the elements with the same options. By default, it doesn't throw an error if nothing found.
 
-- `target` _(String | Element | Element[] | jQuery)_ target element or query string. `Required`
+- `target` _(String | Element | Element[] | jQuery)_ target element(s) or query string. `Required`
 - `options` _[(ContructorOptions)](#constructor-options)_ options for the target elements. `Optional`
-- `ignoreNothingFound` _(Boolean)_ should the method throw an error if no elements found. `Default: false`
+- `ignoreNothingFound` _(Boolean)_ should we throw an error if no matches are found. `Default: true`
 
 
 - ***Returns*:** [`Instance`](#instance-object) 
@@ -281,7 +279,7 @@ Cool, right? 😃
   
 ## Browser Compatibility
 Sticksy.js works in all modern browsers including Internet Explorer 11.\
-If you want the library to react on DOM changes and need to support IE10 or below, 
+If you want the library to react to DOM changes and need to support IE10 or below, 
 you should install [`Mutation Observer Polyfill`](https://github.com/megawac/MutationObserver.js).
 
 Please, open an issue if you have any browser compatibility problems.
