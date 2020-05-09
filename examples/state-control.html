@@ -1,9 +1,17 @@
 <!DOCTYPE html>
-<html lang="us">
+<html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
     <title>Sticksy.js - State control example</title>
     <link rel="stylesheet" href="main.css">
+    <style>
+        .widget.disabled {
+            border-color: #d8d8d8;
+            background-color: #f7f7f7;
+            color: #bdbcbc;
+        }
+    </style>
 </head>
 <body>
 <header class="header">
@@ -48,8 +56,8 @@
         </main>
         <aside>
             <div class="widget"></div>
-            <div class="widget js-sticky-widget">
-                STICKY
+            <div id="sticky-element" data-enabled="true" class="widget js-sticky-widget">
+                Enabled
             </div>
             <div class="widget"></div>
         </aside>
@@ -59,10 +67,23 @@
 </div>
 <script src="../src/sticksy.js"></script>
 <script>
-    var instance = new Sticksy('.widget.js-sticky-widget', {topSpacing: 60})
+    const stickyEl = new Sticksy('.widget.js-sticky-widget', {topSpacing: 60})
+    const node = stickyEl.nodeRef
 
-    setTimeout(function() { instance.disable(); alert('disabled') }, 5000)
-    setTimeout(function() { instance.enable(); alert('enabled') }, 10000)
+    node.addEventListener('click', () => {
+        const isEnabled = node.dataset.enabled === 'true'
+        if(isEnabled) {
+            stickyEl.disable()
+            node.classList.add('disabled')
+            node.dataset.enabled = 'false'
+            node.innerText = 'Disabled'
+        } else {
+            stickyEl.enable()
+            node.classList.remove('disabled')
+            node.dataset.enabled = 'true'
+            node.innerText = 'Enabled'
+        }
+    })
 
     // we can also use global Sticksy.disableAll() method
     // Sticksy.disableAll();
