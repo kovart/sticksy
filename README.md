@@ -6,16 +6,17 @@
 [![snyk](https://snyk.io/test/npm/sticksy/badge.svg)](https://snyk.io/test/npm/sticksy)
 [![license](https://badgen.net/npm/license/lodash)](https://opensource.org/licenses/MIT)
 
-Sticksy.js is a **zero-dependency** JavaScript library for making cool things like **fixed widgets**. It's simple and ultra fast. ⚡\
-Unlike [**Q2W3 WordPress Plugin**](https://wordpress.org/plugins/q2w3-fixed-widget/), you don't need WordPress, jQuery, or other stuff. **You can use it in any web project.**
+Sticksy.js is a **zero-dependency** JavaScript library that sticks your elements to the top until they reaching the bottom.
+Unlike [**Q2W3 WordPress Plugin**](https://wordpress.org/plugins/q2w3-fixed-widget/), you don't need WordPress, jQuery, or other stuff. **You can use it in any web project.** \
+_It's simple and ultra fast. ⚡_
 
 Just import and initialize:
 
 ```javascript
-var stickyEl = new Sticksy('.js-sticky-widget') // and that's all!
+var stickyElems = Sticksy.initializeAll('.container > .sticky') // and that's all!
 ```
 
-> ⚠️ Sticksy **is not** a `position: sticky` polyfill. Sticksy **_moves_** the sibling elements.
+> ⚠️ The library **is not** a `position: sticky` polyfill, it makes the sibling elements move down.
 
 <br/>
 <p align="center">
@@ -24,7 +25,7 @@ var stickyEl = new Sticksy('.js-sticky-widget') // and that's all!
 
 ## When do you need Sticksy?
 
-> **The basic use-case of the library is to make fixed widgets in a sidebar.**
+> The basic use-case of the library is to make **fixed widgets** in a sidebar.
 
 The library is especially useful for ads or other items that visitors want to interact with.
 Sticky blocks are perceived much better by your visitors than unfixed widgets and therefore they have a significantly higher click-through rate.
@@ -36,6 +37,7 @@ _But also you can use it for some design features._
 -   Setup in one line
 -   Super performance
 -   Zero dependencies
+-   Fully written in ES5
 -   Can react to DOM changes
 -   Small size ~1.8Kb (minified gzip)
 
@@ -86,12 +88,12 @@ Watch an example.
 ```html
 <!-- Container -->
 <aside class="sidebar">
-	<!-- Non sticky element -->
-	<div class="widget"></div>
-	<!-- Sticky element -->
-	<div class="widget js-sticky-widget"></div>
-	<div class="widget"></div>
-	<div class="widget"></div>
+    <!-- Non sticky element -->
+    <div class="widget"></div>
+    <!-- Sticky element -->
+    <div class="widget js-sticky-widget"></div>
+    <div class="widget"></div>
+    <div class="widget"></div>
 </aside>
 ```
 
@@ -103,8 +105,8 @@ Then you should initialize an instance with a **new** keyword (it's important):
 var stickyEl = new Sticksy('.js-sticky-widget')
 // just for demonstration of state handling
 stickyEl.onStateChanged = function (state) {
-	if (state === 'fixed') stickyEl.nodeRef.classList.add('widget--fixed')
-	else stickyEl.nodeRef.classList.remove('widget--fixed')
+    if (state === 'fixed') stickyEl.nodeRef.classList.add('widget--fixed')
+    else stickyEl.nodeRef.classList.remove('widget--fixed')
 }
 ```
 
@@ -130,17 +132,17 @@ You can add the one class to all the target elements and initialize them all in 
 
 ```html
 <aside class="sidebar">
-	<div class="widget"></div>
-	<!-- Sticky element -->
-	<div class="widget js-sticky-widget"></div>
+    <div class="widget"></div>
+    <!-- Sticky element -->
+    <div class="widget js-sticky-widget"></div>
 </aside>
 <main>
-	<!-- Some content here -->
+    <!-- Some content here -->
 </main>
 <aside class="sidebar">
-	<!-- Sticky element -->
-	<div class="widget js-sticky-widget"></div>
-	<div class="widget"></div>
+    <!-- Sticky element -->
+    <div class="widget js-sticky-widget"></div>
+    <div class="widget"></div>
 </aside>
 ```
 
@@ -154,7 +156,7 @@ The library can detect changes of the container and its children by using <a hre
 
 ```js
 var stickyEl = new Sticksy('.js-sticky-widget', {
-	listen: true, // Listen for the DOM changes in the container
+    listen: true, // Listen for the DOM changes in the container
 })
 ```
 
@@ -186,8 +188,8 @@ Example:
 
 ```js
 var stickyEl = new Sticksy('.block.js-sticky-widget', {
-	topSpacing: 60, // Specify this when you have a fixed top panel
-	listen: true, // Listen for the DOM changes in the container
+    topSpacing: 60, // Specify this when you have a fixed top panel
+    listen: true, // Listen for the DOM changes in the container
 })
 ```
 
@@ -199,8 +201,8 @@ var stickyEl = new Sticksy('.block.js-sticky-widget', {
 
 ```js
 stickyEl.onStateChanged = function (state) {
-	if (state === 'fixed') stickyEl.nodeRef.classList.add('widget--fixed')
-	else stickyEl.nodeRef.classList.remove('widget--fixed')
+    if (state === 'fixed') stickyEl.nodeRef.classList.add('widget--fixed')
+    else stickyEl.nodeRef.classList.remove('widget--fixed')
 }
 ```
 
@@ -247,8 +249,8 @@ The state can be: `static`, `fixed` and `stuck`.
 
 ```js
 stickyEl.onStateChanged = function (state) {
-	// your handler here
-	if (state === 'fixed') alert('it is fixed!')
+    // your handler here
+    if (state === 'fixed') alert('it is fixed!')
 }
 ```
 
@@ -314,12 +316,12 @@ The library uses the simplest function to calculate the elements state:
 
 ```js
 Sticksy.prototype._calcState = function (windowOffset) {
-	if (windowOffset < this._limits.top) {
-		return States.STATIC
-	} else if (windowOffset >= this._limits.bottom) {
-		return States.STUCK
-	}
-	return States.FIXED
+    if (windowOffset < this._limits.top) {
+        return States.STATIC
+    } else if (windowOffset >= this._limits.bottom) {
+        return States.STUCK
+    }
+    return States.FIXED
 }
 ```
 
