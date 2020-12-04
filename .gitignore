@@ -8,3 +8,5 @@ npm-debug.log
 
 # OSX hidden files
 .DS_Store
+
+.eslintcache
